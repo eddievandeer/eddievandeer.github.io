@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.5.3",
+    "@vuepress/plugin-nprogress": "^1.5.3",
+    "vuepress": "^1.5.3"
+  }
+}
