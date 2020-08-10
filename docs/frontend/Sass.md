@@ -1,3 +1,5 @@
+# Sass笔记
+
 ## 1、Sass的安装（Windows）
 
 ### 1.1 安装Ruby
@@ -53,7 +55,7 @@ sass --watch xxx/sass:xxx/css
 }
 ~~~
 
-- **nested：**嵌套格式（默认）
+-  **nested：** 嵌套格式（默认）
 
   - 保留sass中的嵌套格式，以缩进的形式展示嵌套。
 
@@ -72,7 +74,7 @@ sass --watch xxx/sass:xxx/css
 
 
 
-- **compact：**紧凑格式
+-  **compact：** 紧凑格式
 
   - 每一块样式都独立的放置在一行。
 
@@ -108,7 +110,7 @@ sass --watch xxx/sass:xxx/css
 
     
 
-- **compressed：**压缩格式
+-  **compressed：** 压缩格式
 
   - 所有内容写在一行，占用的空间较小。
 
