@@ -3,13 +3,7 @@ module.exports = [
             text: '首页', link: '/'
       },
       {
-            text: '前端笔记',
-            items: [
-                  { text: '浏览器相关', link: '/front/browser/', target: '_self' },
-                  { text: 'HTML笔记', link: '/front/html/', target: '_self' },
-                  { text: 'CSS笔记', link: '/front/css/', target: '_self' },
-                  { text: 'JS笔记', link: '/front/js/', target: '_self' }
-            ]
+            text: '前端笔记', link: '/frontend/'
       },
       {
             text: '画册', link: '/album/'
