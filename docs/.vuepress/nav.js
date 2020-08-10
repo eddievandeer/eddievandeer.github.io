@@ -30,8 +30,8 @@ module.exports = [
       },
       {
             text: 'CodePen', link: 'https://codepen.io/eddievandeer', target: '_blank'
+      },
+      {
+            text: 'GitHub', link: 'https://github.com/eddievandeer', target: '_blank'
       }
-      // {
-      //       text: 'GitHub', link: 'https://github.com/eddievandeer', target: '_blank'
-      // }
 ]
