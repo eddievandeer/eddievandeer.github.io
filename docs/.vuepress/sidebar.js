@@ -5,8 +5,10 @@ module.exports = {
             'HTML',
             'CSS',
             'JavaScript',
+            'Git',
+            'webpack',
             'Sass',
-            'Git'
+            'VuePress'
       ],
       '/album/': [
             ['', '写在前面'],
