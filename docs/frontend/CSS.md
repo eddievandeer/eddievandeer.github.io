@@ -12,6 +12,12 @@
 }
 ~~~
 
+效果：
+
+![image-20200630221724607.png](https://i.loli.net/2020/09/08/InrgDchJSyWH3OT.png)
+
+
+
 ## clip-path
 
 clip-path是一个css3新属性 , 一般用在svg元素上 , 但是也可以作为普通元素裁剪使用。

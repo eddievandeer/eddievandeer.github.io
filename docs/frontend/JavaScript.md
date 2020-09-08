@@ -16,6 +16,38 @@
 
 
 
+### JS：Object.defineProperty()
+
+该方法会在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象（应当直接在Object构造器对象上使用）
+
+参数：
+
+| 参数名        | 参数描述                                               |
+| ------------- | ------------------------------------------------------ |
+| obj           | 要定义属性的对象                                       |
+| prop          | 要定义或修改的属性的名称                               |
+| descriptor    | 要定义或修改的属性描述符（默认值均为false或undefined） |
+| +configurable | 属性描述符能否被改变（true或false）                    |
+| +enumerable   | 是否出现在对象的枚举属性中（true或false）              |
+| +value        | 定义属性值                                             |
+| +writable     | 能否被赋值运算符改变值（true或false）                  |
+| +get          | 函数，覆盖取值行为                                     |
+| +set          | 函数，覆盖赋值行为                                     |
+
+示例：
+
+~~~js
+const object1 = {}
+
+Object.defineProperty(object1, 'property1', {
+  	value: 42,
+  	writable: false,
+})
+
+// 输出为：42
+console.log(object1.property1)
+~~~
+
 
 
 ## DOM

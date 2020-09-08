@@ -1,8 +1,11 @@
 module.exports = {
-      title: 'Vivek的前端博客',
+      title: 'Vivek的博客小站',
       description: 'May the force be with you',
       head: [
-            ['link', { rel: 'icon', href: '/assets/icon/favicon.ico' }]
+            ['link', {
+                  rel: 'icon',
+                  href: '/assets/icon/favicon.ico'
+            }]
       ],
       markdown: {
             lineNumbers: true
