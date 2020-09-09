@@ -1,5 +1,6 @@
 node_modules
-/docs/.vuepress/dist
+docs/.vuepress/dist
+docs/.vuepress/theme
 
 # Editor directories and files
 .idea
