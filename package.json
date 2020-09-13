@@ -8,14 +8,17 @@
     "docs:build": "vuepress build docs",
     "deploy": "bash deploy.sh"
   },
+  "dependencies": {
+    "@vuepress/theme-default": "^1.0.0-rc.1",
+    "vuepress": "^1.5.4"
+  },
   "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.5.3",
-    "@vuepress/plugin-nprogress": "^1.5.3",
+    "@vuepress/plugin-back-to-top": "^1.5.4",
+    "@vuepress/plugin-nprogress": "^1.5.4",
     "@vuepress/plugin-search": "^1.5.4",
     "font-awesome": "^4.7.0",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.2",
-    "vuepress": "^1.5.3",
     "vuepress-plugin-container": "^2.1.5"
   }
 }

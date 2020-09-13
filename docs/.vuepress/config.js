@@ -1,6 +1,19 @@
 module.exports = {
       title: 'Vivek的博客小站',
       description: 'May the force be with you',
+      plugins: [
+            // 这是 VuePress 默认主题使用这个插件的方式
+            [
+                  'vuepress-plugin-container',
+                  {
+                        type: 'tip',
+                        defaultTitle: {
+                              '/': 'TIP',
+                              '/zh/': '提示',
+                        },
+                  },
+            ],
+      ],
       // head: [
       //       ['link', {
       //             rel: 'icon',
