@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # 互联网
 
 ## HTTP/HTTPS

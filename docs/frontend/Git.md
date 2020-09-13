@@ -1,16 +1,20 @@
+---
+layout: ArticleDetail
+---
+
 # Git笔记
 
 ## 1、本地仓库
 
 ### 1.1工作流程
 
-#### Git的三个区域：
+**Git的三个区域：**
 
 - Git仓库（Git Repository）保存从暂存区提交的最终版，成为一个新的版本
 - 暂存区：已修改的文件暂存在此区域，最后统一提交到Git仓库中
 - 工作区（Working Directory）：添加、编辑、修改文件等操作在此区域进行
 
-#### 工作流程：
+**工作流程：**
 
 1. git status
 
@@ -206,7 +210,7 @@
 
 ### 3.1Git图形管理工具
 
-#### GitHub Desktop
+**GitHub Desktop**
 
 Github出品的软件，了解这个足够了，其他不想看。
 

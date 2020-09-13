@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # HTML笔记
 
 ## H5新特性

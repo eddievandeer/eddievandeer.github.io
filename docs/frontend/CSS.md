@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # CSS笔记
 
 ## border-radius

@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # 浏览器笔记
 
 ## 构建DOM

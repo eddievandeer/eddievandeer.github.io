@@ -1,10 +1,14 @@
+---
+layout: ArticleDetail
+---
+
 # VuePress笔记
 
-# 1、安装
+## 1、安装
 
 > 安装之前，需要确保Node.js的版本要在8或以上
 
-## 1.1 全局安装
+### 1.1 全局安装
 
 ```bash
 # 安装
@@ -23,7 +27,7 @@ vuepress dev .
 vuepress build .
 ```
 
-## 1.2 本地安装
+### 1.2 本地安装
 
 ```bash
 # 将 VuePress 作为一个本地依赖安装
@@ -64,7 +68,7 @@ npm run docs:build # 或者：yarn docs:build
 
 
 
-# 2、目录结构
+## 2、目录结构
 
 VuePress遵循约定大于配置的原则，推荐如下目录结构：
 
@@ -105,7 +109,7 @@ VuePress遵循约定大于配置的原则，推荐如下目录结构：
 
 
 
-## 默认的页面路由
+### 默认的页面路由
 
 | 文件的相对路径     | 页面路由地址   |
 | ------------------ | -------------- |
@@ -115,9 +119,9 @@ VuePress遵循约定大于配置的原则，推荐如下目录结构：
 
 
 
-# 3、基本配置
+## 3、基本配置
 
-## 3.1 配置文件
+### 3.1 配置文件
 
 所有VuePress相关的配置都放在 `.vuepress` 目录下，一个 VuePress 网站必要的配置文件是 `.vuepress/config.js`，它应该导出一个 JavaScript 对象：
 
@@ -130,7 +134,7 @@ module.exports = {
 
 
 
-## 3.2 主题配置
+### 3.2 主题配置
 
 要使用一个主题时，可以在`.vuepress/config.js`配置文件中添加`theme`字段：
 
@@ -149,9 +153,9 @@ module.exports = {
 
 
 
-## 3.3 常用配置
+### 3.3 常用配置
 
-### 3.3.1 导航栏配置
+**3.3.1 导航栏配置**
 
 在`.vuepress/config.js`配置文件中添加`themeConfig`，通过其中的`nav`来配置导航栏：
 
@@ -191,7 +195,7 @@ module.exports = [
 
 
 
-### 3.3.2 侧边栏配置
+**3.3.2 侧边栏配置**
 
 在`.vuepress/config.js`配置文件中添加`themeConfig`，通过其中的`sidebar`来配置导航栏：
 
@@ -214,9 +218,9 @@ themeConfig: {
 
 
 
-# 4、静态资源
+## 4、静态资源
 
-## 4.1 相对路径
+### 4.1 相对路径
 
 在VuePress中，所有Markdown文件都会被webpack编译成Vue组件，因此在引用静态资源时**更倾向于**使用相对路径：
 
@@ -247,13 +251,13 @@ module.export = {
 
 
 
-## 4.2 公共文件
+### 4.2 公共文件
 
 像favicons和PWA的图标等，并不直接被任何一个markdown文件或者主题组件引用的资源，可以放在 `.vuepress/public` 中，它们最终会被复制到生成的静态文件夹中
 
 
 
-## 4.3 基础路径
+### 4.3 基础路径
 
 当网站被部署到一个非根路径下，例如 `https://eddievandeer.github.io/docs/`，需要在 `.vuepress/config.js` 中设置 `base` 的值为 `/docs/` （注意：/开头，/结尾）。 `base` 一旦被设置，将作为前缀插入到 `.vuepress/config.js` 中所有的以/开始的路径
 
@@ -267,7 +271,7 @@ VuePress还提供了一个内置的helper `$withBase`，可以生成正确的路
 
 
 
-# 5、部署到Github
+## 5、部署到Github
 
 步骤：
 

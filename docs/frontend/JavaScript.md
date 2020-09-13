@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # JavaScript笔记
 
 ## JS
@@ -66,11 +70,13 @@ document.queryselector("#id || .class").classList.add("classname");
 
 ### DOM：旋转拖拽
 
-#### 过程
+**过程**
 
-- 获取拖动的距离差
+- 获取鼠标拖动前后的左边
+- 计算拖动的距离差
+- 计算旋转角度
 
-#### 代码
+**代码**
 
 ~~~javascript
 let nowX,nowY,//现在鼠标的坐标
@@ -89,8 +95,8 @@ document.onmousedown = function(e){
         nowX = e2.clientX;
         nowY = e2.clientY;
         
-        minusX = noeX - lastX;
-        minusY = noeY - lastY;
+        minusX = nowX - lastX;
+        minusY = nowY - lastY;
         
         //TODO
         roX = roX - minusY;//上下拖动沿X轴旋转
@@ -216,6 +222,58 @@ e.target和this的区别：
 
 
 
+### DOM：动态锚点
+
+**过程**
+
+- 获取鼠标滚轮滚动距离
+- 通过传入的event事件对象，获取滚动的方向
+
+**代码**
+
+~~~js
+let onScroll = function(e){
+    let event = e || window.event // e的兼容性问题
+    
+    let home = document.querySelector('.blog-home')
+    let about = document.querySelector('#about')
+    
+    // 获取滚动距离
+    let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+    
+    // wheelDelta主要针对ie和Chrome，detail只针对FireFox
+    // wheelDelta值为正，滚动条向上滚动；值为负，滚动条向下滚动，
+    // detail值刚好相反，值为正，滚动条向下滚动；值为负，滚动条向上滚动
+    if (event.wheelDelta < 0 || event.detail > 0) {
+        if (scrolled <= about.offsetTop - 1) {
+            if (event.preventDefault) {
+                event.preventDefault()
+            } else {
+                event.returnValue = false
+            }
+            
+            // window.scrollTo(x, y)
+            window.scrollTo(0, about.offsetTop)
+        }
+    } else {
+        if (scrolled <= about.offsetTop + 60) {
+            if (event.preventDefault) {
+                event.preventDefault()
+            } else {
+                event.returnValue = false
+            }
+            window.scrollTo(0, 0)
+        }
+    }
+}
+
+let main = document.querySelector('.container')
+
+main.addEventListener('mousewheel', onScroll, false)// 兼容FireFox外的浏览器
+main.addEventListener('DOMMouseScroll', onScroll)// 针对FireFox的非标准事件
+main.addEventListener('wheel', onScroll, false)// 针对Chrome的非标准事件，ie不兼容
+~~~
+
 
 
 ## BOM
@@ -231,7 +289,7 @@ e.target和this的区别：
 
 ### BOM：window对象常用事件
 
-#### 窗口加载事件
+**窗口加载事件**
 
 - onload：等页面内容全部加载完成后，再去执行处理函数
 
@@ -257,7 +315,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 
-#### 调整窗口大小事件
+**调整窗口大小事件**
 
 只要窗口大小发生变化就会触发
 
@@ -301,7 +359,7 @@ clearInterval(timer2);//参数为定时器的名字
 
 ### 面向对象
 
-#### 定义对象的写法：
+**定义对象的写法：**
 
 ~~~javascript
 //es5
@@ -328,7 +386,7 @@ class ClassName{
 
 
 
-#### 继承：
+**继承：**
 
 ~~~javascript
 //Son子类，Parent父类
@@ -360,7 +418,7 @@ class Son extends Parent{
 
 
 
-#### 模块：
+**模块：**
 
 es6模块浏览器不支持，需要经过编译（webpack）
 

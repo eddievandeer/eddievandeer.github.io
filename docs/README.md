@@ -1,9 +1,6 @@
 ---
-home: true
-heroImage: /assets/img/logo.jpg
-lang: zh-CN
+title: Vivek的博客小站
 actionText: 前端博客→
-actionLink: /frontend/
-footer: MIT Licensed | Copyright © 2020-present eddievandeer
 ---
 
+# Hello
