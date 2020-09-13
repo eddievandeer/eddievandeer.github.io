@@ -1,4 +1,8 @@
 {
+  "name": "eddievandeer.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
@@ -7,6 +11,11 @@
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.3",
     "@vuepress/plugin-nprogress": "^1.5.3",
-    "vuepress": "^1.5.3"
+    "@vuepress/plugin-search": "^1.5.4",
+    "font-awesome": "^4.7.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.2",
+    "vuepress": "^1.5.3",
+    "vuepress-plugin-container": "^2.1.5"
   }
 }
