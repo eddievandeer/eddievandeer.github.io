@@ -16,7 +16,7 @@
             data() {
                   return {
                         pages: [],
-                        url: window.location.pathname.split('/')[1]
+                        url: ''
                   }
             },
             methods: {
@@ -40,6 +40,7 @@
             },
             mounted() {
                   this.setPage()
+                  this.url = window.location.pathname.split('/')[1]
             },
             watch: {
                   '$route': 'pageChange'
