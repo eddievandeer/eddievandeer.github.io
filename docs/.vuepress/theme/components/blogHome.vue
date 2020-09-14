@@ -41,7 +41,7 @@
                   width: 100%;
                   height: 100%;
                   // background-image: url(https://i.loli.net/2020/09/11/ElcNrtJVkPWamOo.jpg);
-                  background-image: url(https://i.loli.net/2020/09/11/RDoc5C3uTtQ9lUp.jpg);
+                  background-image: url("../../public/assets/img/background.jpg");
                   background-size: cover;
                   background-repeat: no-repeat;
                   filter: brightness(80%);

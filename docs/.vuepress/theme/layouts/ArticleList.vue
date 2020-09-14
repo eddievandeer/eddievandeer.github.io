@@ -23,6 +23,7 @@
                   setPage() {
                         this.pages = []
                         let path = ""
+                        this.url = window.location.pathname.split('/')[1]
                         let filted = this.$site.pages.filter(v => {
                               return v.path.endsWith('html')
                         })
@@ -40,7 +41,6 @@
             },
             mounted() {
                   this.setPage()
-                  this.url = window.location.pathname.split('/')[1]
             },
             watch: {
                   '$route': 'pageChange'

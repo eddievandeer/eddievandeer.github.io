@@ -21,9 +21,5 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-            p {
-                  color: $word-color;
-            }
       }
 </style>

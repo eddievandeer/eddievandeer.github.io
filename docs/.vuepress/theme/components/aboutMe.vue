@@ -7,8 +7,13 @@
 </template>
 
 <script>
+      import myWorks from './myWorks'
+
       export default {
             name: 'aboutMe',
+            components: {
+                  myWorks
+            }
             // TODO
       }
 </script>
