@@ -14,12 +14,12 @@ module.exports = {
                   },
             ],
       ],
-      // head: [
-      //       ['link', {
-      //             rel: 'icon',
-      //             href: '/assets/icon/favicon.ico'
-      //       }]
-      // ],
+      head: [
+            ['link', {
+                  rel: 'icon',
+                  href: '/assets/icon/favicon.ico'
+            }]
+      ],
       // markdown: {
       //       lineNumbers: true
       // },

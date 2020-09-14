@@ -1,4 +1,10 @@
 module.exports = {
+      head: [
+            ['link', {
+                  rel: 'icon',
+                  href: '/assets/icon/favicon.ico'
+            }]
+      ],
       plugins: [
             'vuepress-plugin-container',
             ['@vuepress/search', {
