@@ -1,7 +1,7 @@
 <template>
       <div class="theme-container">
             <blog-header></blog-header>
-            <blog-index :titles="$page.headers"></blog-index>
+            <blog-index></blog-index>
             <div class="article">
                   <div class="article-detail">
                         <Content />
@@ -34,5 +34,11 @@
             max-width: 740px;
             margin: 0 auto;
             padding: 2rem 2.5rem;
+      }
+
+      @media screen and (max-width: 768px) {
+            .article {
+                  padding-left: 0;
+            }
       }
 </style>

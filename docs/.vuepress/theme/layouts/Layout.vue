@@ -41,6 +41,20 @@
                               }
                         }
                         return false
+                  },
+                  mobileScroll() {
+                        if (window.location.pathname != '/') {
+                              return
+                        }
+                        let header = document.querySelector('.blog-header')
+                        let about = document.querySelector('#about')
+                        let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+                        if (scrolled <= about.offsetTop - 120) {
+                              header.classList.add('hide')
+                        } else {
+                              header.classList.remove('hide')
+                        }
+                        return false
                   }
             },
             mounted() {
@@ -55,6 +69,7 @@
                   main.addEventListener('mousewheel', this.onScroll, false)
                   main.addEventListener('DOMMouseScroll', this.onScroll)
                   main.addEventListener('wheel', this.onScroll, false)
+                  main.addEventListener('touchmove', this.mobileScroll, false)
             },
             components: {
                   blogHome

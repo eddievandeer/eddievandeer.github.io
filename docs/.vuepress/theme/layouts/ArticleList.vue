@@ -61,4 +61,12 @@
             justify-content: center;
             align-items: center;
       }
+
+      @media screen and (max-width: 768px) {
+            .about {
+                  width: 100%;
+                  padding: 0 30px;
+                  box-sizing: border-box;
+            }
+      }
 </style>

@@ -71,3 +71,19 @@
             }
       }
 }
+
+@media screen and (max-width: 768px) {
+      .about {
+            margin: 0;
+      }
+
+      .article-list {
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+
+            .article-item {
+                  width: 100%;
+            }
+      }
+}

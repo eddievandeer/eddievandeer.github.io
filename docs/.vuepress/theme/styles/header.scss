@@ -1,15 +1,14 @@
 @import './values.scss';
 
 .blog-header {
-      z-index: 10;
+      @extend .flex;
+      z-index: 20;
       width: 100%;
       height: 60px;
       background-color: $primary-background;
       box-sizing: border-box;
       border-bottom: 1px solid #d1d1d1;
       transition: all .2s cubic-bezier(1, 0.03, 1, 1.04);
-      display: flex;
-      justify-content: center;
       position: sticky;
       top: 0;
       left: 0;
@@ -24,20 +23,16 @@
       }
 
       .bar-item {
+            @extend .flex;
             width: 100px;
             height: 100%;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             transition: all .2s ease-in-out;
 
             a {
+                  @extend .flex;
                   width: 100%;
                   height: 100%;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
                   text-decoration: none;
             }
 
@@ -56,23 +51,19 @@
 }
 
 .tool-bar {
-      width: 80%;
+      width: 100%;
       height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
 
       .tool-bar-1,
-      .tool-bar-2 {
+      .tool-bar-2,
+      .search {
             height: 100%;
             display: flex;
             align-items: center;
       }
-}
-
-.tool-bar-1 {
-      float: left;
-}
-
-.tool-bar-2 {
-      float: right;
 }
 
 .navigation-bar {
@@ -84,12 +75,10 @@
 }
 
 .bar-list {
+      @extend .flex;
       width: 100px;
       height: 100%;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       transition: all .2s ease-in-out;
       overflow: hidden;
 
@@ -164,10 +153,23 @@
 
       .bar-item-list {
             background-color: transparent;
+      }
 
-            .bar-item:hover {
-                  background-color: white;
-                  color: $word-color;
+      .title {
+            color: $primary-background;
+      }
+
+      .show-list {
+            color: $primary-background;
+      }
+}
+
+@media screen and (max-width: 768px) {
+      .search-box input {
+            background-color: transparent;
+
+            &.focused {
+                  background-color: #fff;
             }
       }
 }

@@ -1,4 +1,3 @@
-import '@theme/styles/values.scss'
 import '@theme/styles/main.scss'
 import 'font-awesome/css/font-awesome.min.css'
 import 'prismjs/themes/prism-tomorrow.css'
