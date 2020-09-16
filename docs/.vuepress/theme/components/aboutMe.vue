@@ -3,6 +3,7 @@
             <div>
                   <Content />
             </div>
+            <my-works></my-works>
       </div>
 </template>
 
@@ -14,7 +15,7 @@
             components: {
                   myWorks
             }
-            // TODO
+            // TODO:展示个人信息
       }
 </script>
 
