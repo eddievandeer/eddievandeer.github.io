@@ -67,14 +67,14 @@ sass --watch xxx/sass:xxx/css
 
   - 格式预览：
 
-    ~~~css
-    .box {
-      width: 300px;
-      height: 400px; }
-      .box-title {
-        height: 30px;
-        line-height: 30px; }
-    ~~~
+~~~css
+.box {
+    width: 300px;
+    height: 400px; }
+.box-title {
+    height: 30px;
+    line-height: 30px; }
+~~~
 
 
 
@@ -86,10 +86,10 @@ sass --watch xxx/sass:xxx/css
 
   - 格式预览：
 
-    ~~~css
-    .box { width: 300px; height: 400px; }
-    .box-title { height: 30px; line-height: 30px; }
-    ~~~
+~~~css
+.box { width: 300px; height: 400px; }
+.box-title { height: 30px; line-height: 30px; }
+~~~
 
 
 
@@ -101,18 +101,18 @@ sass --watch xxx/sass:xxx/css
 
   - 格式预览：
 
-    ~~~css
-    .box {
-      width: 300px;
-      height: 400px;
-    }
-    .box-title {
-      height: 30px;
-      line-height: 30px;
-    }
-    ~~~
+~~~css
+.box {
+    width: 300px;
+    height: 400px;
+}
+.box-title {
+    height: 30px;
+    line-height: 30px;
+}
+~~~
 
-    
+​    
 
 -  **compressed：** 压缩格式
 
@@ -122,11 +122,11 @@ sass --watch xxx/sass:xxx/css
 
   - 格式预览：
 
-    ~~~css
-    .box{width:300px;height:400px}.box-title{height:30px;line-height:30px}
-    ~~~
+~~~css
+.box{width:300px;height:400px}.box-title{height:30px;line-height:30px}
+~~~
 
-    
+​    
 
 ## 3、Sass语法
 

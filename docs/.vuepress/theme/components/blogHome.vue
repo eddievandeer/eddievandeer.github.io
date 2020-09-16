@@ -20,14 +20,6 @@
 
       export default {
             name: 'blogHome',
-            // mounted() {
-            //       let home = document.querySelector('.blog-home')
-            //       let screenWidth = window.screen.width
-            //       let screenHeight = window.screen.height
-            //       if (screenWidth <= 768) {
-            //             home.style.height = screenHeight
-            //       }
-            // },
             components: {
                   dropDown,
                   aboutMe
@@ -79,7 +71,7 @@
                         margin-top: 150px;
 
                         h1 {
-                              font-size: 48px;
+                              font-size: 46px;
                               color: rgb(148, 188, 218);
                         }
 
@@ -98,7 +90,7 @@
             // }
 
             .blog-description {
-                  margin-top: 80px;
+                  margin-top: 80px !important;
 
                   p {
                         width: 80%;

@@ -28,12 +28,12 @@
       .article {
             display: block;
             padding-left: 20rem;
-      }
 
-      .article-detail {
-            max-width: 740px;
-            margin: 0 auto;
-            padding: 2rem 2.5rem;
+            .article-detail {
+                  max-width: 740px;
+                  margin: 0 auto;
+                  padding: 2rem 2rem;
+            }
       }
 
       @media screen and (max-width: 768px) {

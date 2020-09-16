@@ -279,50 +279,50 @@ VuePress还提供了一个内置的helper `$withBase`，可以生成正确的路
 
 - 使用Git新建一个分支gh-pages：
 
-  ~~~bash
-  git branch gh-pages
-  ~~~
+~~~bash
+git branch gh-pages
+~~~
 
 - 配置 `.gitignore` 文件，忽略 `node_modules` 目录和 `dist` 目录
 
 - 在项目中创建一个 `deploy.sh` 文件：
 
-  ~~~bash
-  #!/usr/bin/env sh
-  
-  # 确保脚本抛出遇到的错误
-  set -e
-  
-  # 生成静态文件
-  npm run docs:build
-  
-  # 进入生成的文件夹
-  cd docs/.vuepress/dist
-  
-  # 如果是发布到自定义域名
-  # echo 'www.example.com' > CNAME
-  
-  git init
-  git add -A
-  git commit -m 'deploy'
-  
-  # 如果发布到 https://<USERNAME>.github.io
-  git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master:gh-pages
-  
-  # 如果发布到 https://<USERNAME>.github.io/<REPO>
-  git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
-  
-  cd -
-  ~~~
+~~~bash
+#!/usr/bin/env sh
+
+# 确保脚本抛出遇到的错误
+set -e
+
+# 生成静态文件
+npm run docs:build
+
+# 进入生成的文件夹
+cd docs/.vuepress/dist
+
+# 如果是发布到自定义域名
+# echo 'www.example.com' > CNAME
+
+git init
+git add -A
+git commit -m 'deploy'
+
+# 如果发布到 https://<USERNAME>.github.io
+git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master:gh-pages
+
+# 如果发布到 https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+
+cd -
+~~~
 
 - 使用Git将代码发布到主分支master上，并运行 `deploy.sh` 文件的脚本，将编译后的文件发布到gh-pages分支：
 
-  ~~~bash
-  git add -A
-  git commit -m "message"
-  git push
-  yarn deploy
-  ~~~
+~~~bash
+git add -A
+git commit -m "message"
+git push
+yarn deploy
+~~~
 
 :::tip
 
