@@ -20,14 +20,14 @@
 
       export default {
             name: 'blogHome',
-            mounted() {
-                  let home = document.querySelector('.blog-home')
-                  let screenWidth = window.screen.width || document.body.clientWidth
-                  let screenHeight = window.screen.height || document.body.clientHeight
-                  if (screenWidth <= 768) {
-                        home.style.height = screenHeight
-                  }
-            },
+            // mounted() {
+            //       let home = document.querySelector('.blog-home')
+            //       let screenWidth = window.screen.width
+            //       let screenHeight = window.screen.height
+            //       if (screenWidth <= 768) {
+            //             home.style.height = screenHeight
+            //       }
+            // },
             components: {
                   dropDown,
                   aboutMe
@@ -55,6 +55,8 @@
                   background-position: center top;
                   filter: brightness(80%);
                   position: absolute;
+                  top: 0;
+                  left: 0;
             }
 
             .home-content {
