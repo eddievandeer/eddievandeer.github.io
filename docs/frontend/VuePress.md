@@ -330,3 +330,96 @@ yarn deploy
 
 :::
 
+
+
+## 6、自定义主题
+
+### 6.1 目录结构
+
+在 `.vuepress` 文件夹下创建 `thmem` ，目录结构如下：
+
+```
+theme
+├── components 			//组件
+├── global-components 	//全局组件
+├── layouts				//布局
+|   ├── Layout.vue		//主页布局文件
+|   ├── AnotherLayout.vue
+|   └── 404.vue
+├── styles				//样式
+|   ├── index.css
+|   └── palette.styl	//调色板
+├── index.js			//入口文件
+└── enhanceApp.js		//客户端增强文件，可导入全局文件
+```
+
+
+
+### 6.2 组件
+
+在 `components` 目录下的.vue文件将会作为一般组件来使用，而 `global-components` 目录下的.vue文件将会被自动注册为全局组件，可以直接使用
+
+
+
+### 6.3 布局
+
+在 `layout` 目录下创建一个 `Layout.vue` 文件，Vuepress将会以此为首页布局来渲染 `docs` 根目录下的 `README.md` 文件
+
+其他目录下的 `README.md` 文件需要添加Front Matter：
+
+~~~yml
+---
+layout: ArticleDetail
+---
+~~~
+
+以此来指定该页面要渲染在哪一个布局文件里
+
+ `404.vue` 文件将会在匹配不到相应路由时渲染，提示用户错误访问
+
+
+
+### 6.4 配置
+
+在 `index.js` 文件下可以配置要使用的插件，使用方式：
+
+~~~js
+module.exports = {
+    //配置网页图标
+    head: [
+        ['link', {
+            rel: 'icon',
+            href: '/assets/icon/favicon.ico'
+        }]
+    ],
+    //配置插件
+    plugins: [
+        'vuepress-plugin-container',
+        ['@vuepress/search', {
+            searchMaxSuggestions: 10
+        }],
+        '@vuepress/back-to-top',
+        '@vuepress/nprogress'
+    ]
+}
+~~~
+
+在 `enhanceApp.js` 文件下可以进行应用级别的优化，使用方式：
+
+~~~js
+//导入全局使用的文件
+import '@theme/styles/main.scss'
+import 'font-awesome/css/font-awesome.min.css'
+import 'prismjs/themes/prism-tomorrow.css'
+
+export default ({
+      Vue, // VuePress 正在使用的 Vue 构造函数
+      options, // 附加到根实例的一些选项
+      router, // 当前应用的路由实例
+      siteData, // 站点元数据
+      isServer // 当前应用配置是处于 服务端渲染 或 客户端
+}) => {
+      // ...做一些其他的应用级别的优化
+}
+~~~
+

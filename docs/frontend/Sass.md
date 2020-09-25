@@ -547,10 +547,10 @@ $colors: (light: #FFFFFF, dark: #000000);
 
 @function setColor($key) {
     @if not map-has-key($colors, $key) {
-        //警告（显示在控制台）
+        //警告信息（显示在控制台）
         @warn "在Map中找不到#{$key}这个key";
         
-        //错误（显示在输出文件）
+        //错误信息（显示在输出文件）
         @error "找不到key";
     }
     @return map-get($colors, $key);
