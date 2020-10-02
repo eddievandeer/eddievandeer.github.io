@@ -12,7 +12,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm install
-          npm run build
+          npm run docs:build
         env:
           CI: false
 
