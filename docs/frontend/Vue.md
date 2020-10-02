@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # Vue笔记
 
 ## 1、Vue基础
