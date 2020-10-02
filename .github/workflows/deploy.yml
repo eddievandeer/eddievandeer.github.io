@@ -22,4 +22,3 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: myblog
           FOLDER: docs/.vuepress/dist
-          CLEAN: true
