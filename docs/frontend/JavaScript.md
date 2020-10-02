@@ -54,6 +54,51 @@ console.log(object1.property1)
 
 
 
+### JS：Object.assign()
+
+`Object.assign()` 方法用于将所有可枚举属性的值从**一个或多个**源对象复制到目标对象。它将返回目标对象。
+
+例：
+
+~~~js
+const target = { a: 1, b: 2 };
+
+const options = {
+    color: 'pink'
+};
+
+const data = [{
+    content: 'hello world'
+}];
+
+// 语法：assign(目标对象, ...源对象)
+// 改变了目标对象的同时返回目标对象
+const returnedTarget = Object.assign(target, options, data);
+
+console.log(target);
+// 输出：Object { a: 1, b: 2, color: "pink", danmuData: Array [Object { content: "hello world" }] }
+
+console.log(returnedTarget);
+// 输出：Object { a: 1, b: 2, color: "pink", danmuData: Array [Object { content: "hello world" }] }
+~~~
+
+
+
+### JS：Array.prototype.map()
+
+该方法用于创建一个新数组，传递的参数为一个函数，生成的新数组内容为传入函数的返回值，例：
+
+~~~js
+const array1 = [1, 4, 9, 16];
+
+const array2 = array1.map(x => x * 2);
+
+console.log(array2);
+// 输出：Array [2, 8, 18, 32]
+~~~
+
+
+
 ### JS：基本类型和引用类型
 
 **基本类型：**
@@ -87,228 +132,6 @@ c.test === 2// true
 JavaScript是一门**动态类型语言**，由于它的语言特性使得编译器没有办法在运行前知道变量的类型，只有在运行期间才能确定变量类型，因此**不能在运行前编译出更加迅速的机器代码**
 
 虽然如此，JavaScript执行起来依然很快，这是因为现代的JavaScript引擎使用了一项叫做**Just-Time Compilation（运行时编译，简称JIT）**的技术，就是在运行阶段生成机器代码。JIT把代码的运行和生成机器代码结合在一起，在运行阶段收集类型信息，根据这些信息编译
-
-
-
-## DOM
-
-### DOM：toggle()
-
-作用：判断指定的类是否存在，若存在则移除，不存在则添加。
-
-用法：
-
-~~~javascript
-document.queryselector("#id || .class").classList.add("classname");
-~~~
-
-
-
-### DOM：旋转拖拽
-
-**过程**
-
-- 获取鼠标拖动前后的左边
-- 计算拖动的距离差
-- 计算旋转角度
-
-**代码**
-
-~~~javascript
-let nowX,nowY,//现在鼠标的坐标
-	lastX,lastY,//上一次鼠标的坐标
-    minusX,minusY,//距离差
-    roX,roY;//旋转度数
-let El = document.getElementById("id");
-
-document.onmousedown = function(e){
-    let e1 = e || window.event;//兼容问题，IE不能直接获取
-    lastX = e1.clientX;
-	lastY = e1.clientY;
-    
-    this.onmousemove = function(e){
-        let e2 = e || window.event;
-        nowX = e2.clientX;
-        nowY = e2.clientY;
-        
-        minusX = nowX - lastX;
-        minusY = nowY - lastY;
-        
-        //TODO
-        roX = roX - minusY;//上下拖动沿X轴旋转
-        roY = roY + minusX;//左右拖动沿Y轴旋转
-        
-        El.style.transform = "rotateX(" +roX+ "deg)rotateY(" + roY + "deg)";
-        
-        lastX = nowX;
-        lastY = nowY;
-    }
-}
-~~~
-
-
-
-### DOM：HTML5新增元素获取方式
-
-- queryElementByClassname()：
-  - 返回所有同类名的元素（集合）
-- querySelector()：
-  - 返回指定选择器的第一个元素
-- querySelectorAll()：
-  - 返回指定选择器的所有元素（集合）
-- 获取父元素中的子元素：
-  - querySelector('.parentClass').querySelectorAll('img');
-- 特殊元素的获取：
-  - body：document.body
-  - html：document.documentElement
-
-
-
-### DOM：排他算法
-
-遍历排除其他，然后处理自身
-
-~~~javascript
-let el = document.querySelector('.className').querySelector('li');
-
-for(let i = 0;i < el.length;i++){
-    el[i].onclick = function(){
-        //遍历排除其他
-        for(let i = 0;i < el.length;i++){
-            el[i].classList.remove('active');
-        }
-        //处理自身
-        this.classList.add('active');
-    }
-}
-~~~
-
-
-
-### DOM：H5新增自定义属性
-
-- 规范：自定义的属性以 **data-** 开头
-
-- 获取：
-
-  - 兼容性获取：
-
-    ~~~javascript
-    element.getAttribute('data-xxx');
-    element.getAttribute('data-list-first');
-    ~~~
-
-  - H5新增获取方法（只能获取**data-**开头的）：
-
-    ~~~javascript
-    element.dataset.xxx;
-    element.dataset.listFirst;//-改驼峰
-    ~~~
-
-
-
-### DOM：事件流
-
-描述的是从页面中接收事件的顺序，指事件在元素节点之间按照特定的顺序传播的过程。
-
-JS代码只能执行捕获或冒泡其中的一个阶段。
-
-~~~javascript
-//第三个参数设置为true则处于捕获阶段
-document.querySelector('.son').addEventListener('click',function(){
-    //TODO
-},true)
-
-document.querySelector('.parent').addEventListener('click',function(){
-    //TODO
-},true)
-//执行结果先parent，再son
-
-
-//第三个参数设置为false或者不设置（默认false），则处于冒泡阶段
-document.querySelector('.son').addEventListener('click',function(){
-    //TODO
-})
-
-document.querySelector('.parent').addEventListener('click',function(){
-    //TODO
-})
-//执行结果先son，再parent
-~~~
-
-
-
-### DOM：事件对象
-
-常写作event，作为侦听函数的形参，可以通过事件对象获取和事件相关的信息，如点击事件时获取鼠标位置，键盘事件获取按下了哪个键。
-
-兼容性问题：IE678通过window.event
-
-~~~javascript
-document.querySelector('.xxx').addEventListener('click',function(event){
-    //TODO
-    e = e || window.event;//兼容性问题，一般不考虑
-})
-~~~
-
-e.target和this的区别：
-
-- e.target：返回触发事件的对象
-- this：返回绑定事件的对象（相似：e.currentTarget）
-
-
-
-### DOM：动态锚点
-
-**过程**
-
-- 获取鼠标滚轮滚动距离
-- 通过传入的event事件对象，获取滚动的方向
-
-**代码**
-
-~~~js
-let onScroll = function(e){
-    let event = e || window.event // e的兼容性问题
-    
-    let home = document.querySelector('.blog-home')
-    let about = document.querySelector('#about')
-    
-    // 获取滚动距离
-    let scrolled = document.documentElement.scrollTop || document.body.scrollTop
-    
-    // wheelDelta主要针对ie和Chrome，detail只针对FireFox
-    // wheelDelta值为正，滚动条向上滚动；值为负，滚动条向下滚动，
-    // detail值刚好相反，值为正，滚动条向下滚动；值为负，滚动条向上滚动
-    if (event.wheelDelta < 0 || event.detail > 0) {
-        if (scrolled <= about.offsetTop - 1) {
-            if (event.preventDefault) {
-                event.preventDefault()
-            } else {
-                event.returnValue = false
-            }
-            
-            // window.scrollTo(x, y)
-            window.scrollTo(0, about.offsetTop)
-        }
-    } else {
-        if (scrolled <= about.offsetTop + 60) {
-            if (event.preventDefault) {
-                event.preventDefault()
-            } else {
-                event.returnValue = false
-            }
-            window.scrollTo(0, 0)
-        }
-    }
-}
-
-let main = document.querySelector('.container')
-
-main.addEventListener('mousewheel', onScroll, false)// 兼容FireFox外的浏览器
-main.addEventListener('DOMMouseScroll', onScroll)// 针对FireFox的非标准事件
-main.addEventListener('wheel', onScroll, false)// 针对Chrome的非标准事件，ie不兼容
-~~~
 
 
 
@@ -349,8 +172,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 })
 ~~~
 
-
-
 **调整窗口大小事件**
 
 只要窗口大小发生变化就会触发
@@ -388,6 +209,50 @@ clearInterval(timer2);//参数为定时器的名字
 ~~~
 
 
+
+### BOM：location对象
+
+| location对象方法   | 说明                                   |
+| ------------------ | -------------------------------------- |
+| location.assign()  | 跟设置href效果一样，也称为重定向页面   |
+| location.replace() | 替换当前页面，不记录历史，因此不能后退 |
+| location.reload()  | 重新加载页面，相当于按刷新键           |
+
+
+
+### BOM：元素偏移量offset
+
+| offset系列方法       | 说明                                                |
+| -------------------- | --------------------------------------------------- |
+| element.offsetParent | 返回该元素带有position的父元素，若无返回body        |
+| element.offsetTop    | 返回相对与带有position的父元素上方的偏移            |
+| element.offsetLeft   | 返回相对与带有position的父元素左方的偏移            |
+| element.offsetWidth  | 返回自身包括padding、border、内容区的宽度，不带单位 |
+| element.offsetHeight | 返回自身包括padding、border、内容区的高度，不带单位 |
+
+
+
+### BOM：元素可视区client
+
+| client系列属性       | 作用                                 |
+| -------------------- | ------------------------------------ |
+| element.clientTop    | 返回上边框大小                       |
+| element.clientLeft   | 返回左边框大小                       |
+| element.clientWidth  | 返回自身不包括border的宽度，不带单位 |
+| element.clientHeight | 返回自身不包括border的高度，不带单位 |
+
+
+
+### BOM：元素滚动scroll
+
+scroll事件：当滚动条发生变化时触发该事件
+
+| scroll系列属性       | 说明                                     |
+| -------------------- | ---------------------------------------- |
+| element.scrollTop    | 返回被卷去的上侧距离，不带单位           |
+| element.scrollLeft   | 返回被卷去的左侧距离，不带单位           |
+| element.scrollWidth  | 返回自身实际宽度，超出部分也算，不带单位 |
+| element.scrollHeight | 返回自身实际高度，超出部分也算，不带单位 |
 
 
 
@@ -536,4 +401,3 @@ function add(first, second, ...remaining) {
 	return first + second + remaining.reduce((acc, curr) => acc + curr, 0);
 }
 ~~~
-

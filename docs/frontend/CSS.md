@@ -97,6 +97,8 @@ clip-path: unset;
 
 ## border-style
 
+![image-20200712093517399.png](https://i.loli.net/2020/10/01/s31DopgIZ4yxTlW.png)
+
 用border做一个小三角：
 
 ~~~css
