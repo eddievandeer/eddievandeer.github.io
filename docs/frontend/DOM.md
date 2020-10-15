@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # DOM笔记
 
 ## DOM：toggle()

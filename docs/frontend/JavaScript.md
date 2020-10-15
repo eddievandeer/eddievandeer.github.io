@@ -6,6 +6,18 @@ layout: ArticleDetail
 
 ## JS
 
+### JS：AJAX原理及各种封装
+
+原生js创建ajax对象：
+
+~~~js
+let o = window.XMLHttpRequest ?
+    	new window.XMLHttpRequest :
+		new ActiveXObject('Microsoft.XMLHTTP')
+~~~
+
+
+
 ### JS：同步、异步执行原理
 
 - 同步：同步任务都在主线程上执行，形成一个**执行栈**
@@ -61,24 +73,24 @@ console.log(object1.property1)
 例：
 
 ~~~js
-const target = { a: 1, b: 2 };
+const target = { a: 1, b: 2 }
 
 const options = {
     color: 'pink'
-};
+}
 
 const data = [{
     content: 'hello world'
-}];
+}]
 
 // 语法：assign(目标对象, ...源对象)
 // 改变了目标对象的同时返回目标对象
-const returnedTarget = Object.assign(target, options, data);
+const returnedTarget = Object.assign(target, options, data)
 
-console.log(target);
+console.log(target)
 // 输出：Object { a: 1, b: 2, color: "pink", danmuData: Array [Object { content: "hello world" }] }
 
-console.log(returnedTarget);
+console.log(returnedTarget)
 // 输出：Object { a: 1, b: 2, color: "pink", danmuData: Array [Object { content: "hello world" }] }
 ~~~
 
@@ -89,11 +101,11 @@ console.log(returnedTarget);
 该方法用于创建一个新数组，传递的参数为一个函数，生成的新数组内容为传入函数的返回值，例：
 
 ~~~js
-const array1 = [1, 4, 9, 16];
+const array1 = [1, 4, 9, 16]
 
-const array2 = array1.map(x => x * 2);
+const array2 = array1.map(x => x * 2)
 
-console.log(array2);
+console.log(array2)
 // 输出：Array [2, 8, 18, 32]
 ~~~
 
@@ -401,3 +413,131 @@ function add(first, second, ...remaining) {
 	return first + second + remaining.reduce((acc, curr) => acc + curr, 0);
 }
 ~~~
+
+
+
+### Promise
+
+
+
+
+
+### for...of语句
+
+在可迭代对象上创建一个迭代循环，调用自定义的迭代钩子，为每个不同属性的值执行语句
+
+语法：
+
+~~~js
+// 可迭代对象包括Array，Map，Set，String，TypeArray，arguments等
+let array = ['a','b','c']
+
+for(let element of array){
+    console.log(element)
+}
+~~~
+
+与for...in区别：for...in用于迭代对象的可枚举属性
+
+
+
+### 可迭代协议和迭代器协议
+
+**可迭代协议**
+
+允许对象定义或定制自身迭代行为的协议。一个**可迭代**的对象，必须实现`@@iterator`方法，可通过常量`Symbol.iterator`访问该属性。
+
+当一个对象需要被迭代时，会先以不带参数的形式调用`@@iterator`方法，再使用该方法返回的迭代器获取要迭代的值
+
+~~~js
+let someString = 'hello'
+typeof someString[Symbol.iterator]			// 结果为："function"
+
+let iterator = someString[Symbol.iterator]()// 返回String迭代器对象
+iterator + ""								// 结果为：[object String Iterator]
+
+iterator.next()								// 结果为：{ value: "h", done: false }
+~~~
+
+
+
+**迭代器协议**
+
+定义了一个对象只有实现了`next()`方法才能成为迭代器，而`next()`方法还需要满足以下条件：
+
+- 无参数，返回一个对象
+- 对象有两个值：
+  - done：若迭代器已经迭代到最后一个值，则为true
+  - value：迭代器返回的值
+
+
+
+### 迭代器
+
+迭代器是一个特殊的对象，所有的迭代器对象都有一个`next()`方法，通过这一方法实现**迭代器协议**。`next()`方法返回一个具有两个属性的对象，一个是`value`，表示迭代器返回的值；另一个是`done`，用于判断序列是否已经迭代到最后一个值，是为true，否为false。迭代器还会保存一个内部指针指向当前值的位置，调用`next()`方法时，该指针将会指向下一个可用值
+
+手动为对象部署迭代器：
+
+~~~js
+let ojb = {
+    data: [1, 2, 3, 4, 5],
+    [Symbol.iterator]() {
+        const self = this
+        let i = 0
+        return {
+            next: function () {
+                let result
+                if (i < self.data.length) {
+                    result = {
+                        value: self.data[i++],
+                        done: false
+                    }
+                    return result
+                }
+                return {
+                    value: i,
+                    done: true
+                }
+            }
+        }
+    }
+}
+
+let iterator = ojb[Symbol.iterator]()
+let result = iterator.next()
+while (!result.done) {
+    console.log(result.value)
+    result = iterator.next()
+}
+~~~
+
+
+
+### 生成器函数
+
+生成器函数相当于一个包含自有迭代算法的函数，该函数可以自动维护自己的状态，最初调用时返回一个迭代器
+
+语法：
+
+~~~js
+// function后需加一个*
+function* createIterator(start = 0, end = Infinity, step = 1) {
+    for (let i = start; i < end; i += step) {
+        yield i;
+    }
+}
+var a = makeRangeIterator(1,10,2)
+a.next() // {value: 1, done: false}
+a.next() // {value: 3, done: false}
+a.next() // {value: 5, done: false}
+a.next() // {value: 7, done: false}
+a.next() // {value: 9, done: false}
+a.next() // {value: undefined, done: true}
+~~~
+
+特性：
+
+- yield控制next()方法时的返回值及返回顺序
+
+- 每执行完一条yield语句后函数就会自动停止执行，直到再次调用迭代器的`next()`方法才会继续执行下一条yield
+

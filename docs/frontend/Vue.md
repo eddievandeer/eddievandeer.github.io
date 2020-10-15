@@ -127,6 +127,7 @@ var app = new Vue({
 使用过滤器：
 
 ~~~html
+<!-- |为管道符号 -->
 <!-- 使用单个过滤器 -->
 <div>{{msg | filterName}}</div>
 
@@ -763,3 +764,312 @@ module.exports = {
 
 
 
+## 5、Vuex的简单使用
+
+使用Vuex：
+
+~~~js
+// main.js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+// 使用Vuex
+Vue.use(Vuex)
+
+// 创建store
+const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
+    mutations: {
+        increment (state) {
+            state.count++
+        }
+    }
+})
+
+new Vue({
+    el: '#app',
+    // 注入store
+    store
+})
+~~~
+
+
+
+### 5.1 State
+
+Vuex使用单一状态树，一般使用计算属性获取状态：
+
+~~~vue
+<script>
+    export default {
+        computed: {
+            computed: {
+                count () {
+                    return this.$store.state.count
+                }
+            }
+        }
+    }
+</script>
+~~~
+
+**mapState辅助函数**
+
+解决了反复声明计算属性的繁琐操作：
+
+~~~vue
+<script>
+    export default {
+        computed: mapState({
+            count: state => state.count,
+            // 传字符串参数，'count'等同于state => state.count
+            countAlias: 'count',
+        })
+    }
+</script>
+~~~
+
+
+
+### 5.2 Getters
+
+store中的"**getter**"可以当作store中的计算属性，"getter"的返回值依赖于state中的值，当依赖值发生变动"getter"将会重新计算
+
+定义"gatter"：
+
+~~~js
+// store.js 或 main.js
+const store = new Vuex.Store({
+    state: {
+        todos: [
+            { id: 1, text: '...', done: true },
+            { id: 2, text: '...', done: false }
+        ]
+    },
+    getters: {
+        doneTodos: state => {
+            // 处理state中的值后返回
+            return state.todos.filter(todo => todo.done)
+        }
+    }
+})
+~~~
+
+访问"getter"：
+
+~~~vue
+<script>
+    export default {
+        computed: {
+            doneTodosCount () {
+                return this.$store.getters.doneTodos
+            }
+        }
+    }
+</script>
+~~~
+
+**mapGetters辅助函数**
+
+使用对象展开运算符将store中的getter映射到计算属性上：
+
+~~~vue
+<script>
+    // 要先引入mapGetters
+    import { mapGetters } from 'vuex'
+
+    export default {
+        computed: {
+            // 返回一个对象
+            ...mapGetters([
+                'doneTodosCount',
+                'anotherGetter',
+            ])
+        },
+        // 或以对象的形式传参，用于起别名
+        ...mapGetters({
+            // 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`
+            doneCount: 'doneTodosCount'
+        })
+    }
+</script>
+~~~
+
+
+
+### 5.3 Mutations
+
+store中的状态必须通过提交 `mutation` 才能变更，每一个 `mutation` 包含两个部分，一个是字符串的事件类型**type**，和一个回调函数**handler**。事件类型就是为这个mutation所起的名字，回调函数则是用于执行状态更改操作，并且默认接收 `state` 作为第一个参数
+
+每一个mutation的**handler**都不能直接调用，需要调用 **store.commit()** 方法并传入相应的**type**来唤醒一个**handler**：
+
+~~~js
+// 创建一个mutation
+const store = new Vuex.Store({
+    // ...
+    mutations: {
+        increment (state) {
+            state.count++
+        }
+    }
+})
+
+// 触发一个type为'increment'的mutation
+store.commit('increment')
+
+// store.commit也可传入额外的参数，称为载荷
+// 一般载荷应为一个对象，这样会更易读
+const store = new Vuex.Store({
+    // ...
+    mutations: {
+        increment (state, payload) {
+            state.count += payload.amount
+        }
+    }
+})
+
+// 传参调用mutation
+store.commit('increment', {
+	amount: 10
+})
+~~~
+
+创建mutation的时候也可以选择使用**常量**来替代mutation的事件类型，同时把这些常量放在单独的文件中可以让整个应用包含的mutation一目了然：
+
+~~~js
+// mutation-types.js
+export const SOME_MUTATION = 'SOME_MUTATION'
+
+// store.js
+import Vuex from 'vuex'
+import { SOME_MUTATION } from './mutatino-types'
+
+const store = new Vuex.Store({
+    state: {
+        // ...
+    },
+    mutations: {
+        // 使用 ES2015 风格的计算属性命名功能来使用一个常量作为函数名
+        [SOME_MUTATION] (state){
+            // ...
+        }
+    }
+})
+~~~
+
+:::tip
+
+**Mutation 必须是同步函数**
+
+:::
+
+**mapMutations辅助函数**
+
+使用mapMutations辅助函数可将组件中的 `methods` 映射为 `store.commit` ，提交mutation时可直接调用
+
+~~~vue
+<script>
+    // 要先引入mapMutations
+    import { mapMutations } from 'vuex'
+
+    export default {
+        // ...
+        methods: {
+            ...mapMutations([
+                'increment',
+                // 也支持载荷
+                // this.incrementBy(amount) -> this.$store.commit('incrementBy', amount)
+                'incrementBy'
+            ])，
+            // 或以对象的形式传参，用于起别名
+            ...mapMutations({
+            	// 将 `this.add()` 映射为 `this.$store.commit('increment')`
+            	add: 'increment'
+        	})
+    	}
+    }
+</script>
+~~~
+
+
+
+### 5.4 Actions
+
+Action提交的是mutation，不能直接变更状态，同时Action是可以包含任意异步操作的
+
+**注册Action：**
+
+~~~js
+const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
+    mutations: {
+        increment (state) {
+            state.count++
+        }
+    },
+    actions: {
+        // context是一个和store实例具有相同方法和属性的对象
+        increment (context) {
+            context.commit('increment')
+        }
+    },
+    // 使用参数解构简化代码
+    actions: {
+    	increment ({ commit }) {
+    	commit('increment')
+	}
+}
+})
+~~~
+
+**分发Action：**
+
+~~~js
+// Action通过store.dispatch方法触发
+store.dispatch('increment')
+
+// 载荷形式分发
+store.dispatch('incrementAsync', {
+    amount: 10
+})
+~~~
+
+
+
+### 5.5 Modules
+
+Vuex也支持模块化，避免当状态数量庞大时store对象过于臃肿
+
+~~~js
+const moduleA = {
+  	state: () => ({ ... }),
+  	mutations: { ... },
+ 	actions: { ... },
+ 	getters: { ... }
+}
+
+const moduleB = {
+  	state: () => ({ ... }),
+  	mutations: { ... },
+  	actions: { ... }
+}
+
+// 创建store实例时使用modules添加模块
+const store = new Vuex.Store({
+  	modules: {
+    	a: moduleA,
+    	b: moduleB
+  	}
+})
+
+store.state.a // -> 获取moduleA 的状态
+store.state.b // -> 获取moduleB 的状态
+~~~
+
+
+
+## 6、Vue源码
