@@ -143,7 +143,7 @@
 
             .list-item {
                   width: 100%;
-                  height: 50px;
+                  min-height: 50px;
                   margin: 10px 0;
                   border-bottom: 1px solid #d1d1d1;
                   background-color: $primary-background;

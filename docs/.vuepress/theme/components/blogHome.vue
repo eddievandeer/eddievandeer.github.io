@@ -1,5 +1,5 @@
 <template>
-      <div class="home-page">
+      <div class="home-page" ref="main">
             <div class="blog-home">
                   <div class="home-content">
                         <!-- <div class="blog-icon"></div> -->
@@ -23,7 +23,137 @@
             components: {
                   dropDown,
                   aboutMe
-            }
+            },
+            data() {
+                  return {
+                        scrollOffset: 0,
+                        mouseEvent: '',
+                        inSlides: true,
+                        slidesLock: false
+                  }
+            },
+            mounted() {
+                  this.bindEvent()
+            },
+            methods: {
+                  bindEvent() {
+                        let main = this.$refs.main
+                        this.mouseEvent =
+                              document.onmousewheel !== undefined ?
+                              "mousewheel" :
+                              "DOMMouseScroll"
+
+                        if (this.mouseEvent == "mousewheel") {
+                              main.addEventListener(
+                                    "mousewheel",
+                                    e => {
+                                          let y = -0.83 * e.wheelDelta
+                                          this.onMouseWheel(e, y)
+                                    },
+                                    false
+                              );
+                        } else if (this.mouseEvent == "DOMMouseScroll") {
+                              main.addEventListener(
+                                    "DOMMouseScroll",
+                                    e => {
+                                          console.log(e)
+                                          this.onMouseWheel(e, e.detail)
+                                    },
+                                    false
+                              );
+                              main.addEventListener(
+                                    "MozMousePixelScroll",
+                                    e => {
+                                          console.log(e)
+                                          this.onMouseWheel(e, e.detail)
+                                    },
+                                    false
+                              );
+                        } else {
+                              main.addEventListener(
+                                    this.mouseEvent,
+                                    e => {
+                                          let y = e.deltaY
+                                          if (e.deltaMode == 1) {
+                                                y = e.deltaY * 32
+                                          }
+                                          this.onMouseWheel(e, y)
+                                    },
+                                    false
+                              );
+                        }
+
+                  },
+                  onMouseWheel(e, deltaY) {
+                        let event = e || window.event
+                        let main = this.$refs.main
+                        let offset = this.$refs.main.getBoundingClientRect().top
+
+                        if (!this.ifInSlide(deltaY, offset)) return
+
+                        this.scrollOffset = document.documentElement.scrollTop || document.body.scrollTop
+
+                        // this.inSlides = this.scrollOffset > about.offsetHeight
+                        // if (this.inSlides) {
+                        //       return
+                        // }
+                        if (event.preventDefault) {
+                              event.preventDefault()
+                              event.stopPropagation()
+                        } else if (document.all) {
+                              event.cancelBubble = true
+                              event.returnValue = false
+                        } else {
+                              event.stopPropagation()
+                        }
+
+                        if (window.location.pathname != '/' || this.slidesLock) return
+
+                        this.slidesLock = true
+
+                        this.doScroll(deltaY)
+                  },
+                  doScroll(deltaY) {
+                        let header = document.querySelector('.blog-header')
+                        let home = document.querySelector('.blog-home')
+                        let about = document.querySelector('#about')
+                        if (deltaY > 0) {
+                              window.scrollTo(0, about.scrollHeight)
+                              header.classList.remove('hide')
+                        } else {
+                              window.scrollTo(0, 0)
+                              header.classList.add('hide')
+                        }
+
+                        this.interval = setTimeout((scrolled) => {
+                              this.slidesLock = false
+                        }, 500)
+                  },
+                  ifInSlide(deltaY, offset) {
+                        let about = document.querySelector('#about')
+                        return deltaY > 0 ? (-offset < about.offsetHeight - 1) : (-offset <= about.scrollHeight + 80)
+                  },
+                  gsScrollControl() {
+                        isScrolling = true;
+
+                        // scroll end
+                        if (scrollTimeCurrent > scrollTime) {
+                              if (scrollLockTime > 0) {
+                                    setTimeout(endScroll, scrollLockTime);
+                                    return;
+                              }
+                              endScroll();
+                              return;
+                        }
+
+                        let x = scrollTimeCurrent / scrollTime;
+                        let y = 1 - Math.pow(1 - x, scrollScale);
+                        scrollElement.scrollTop = scrollStart + y * scrollOffset;
+                        scrollTimeCurrent += scrollInterval;
+
+                        setTimeout(gsScrollControl, scrollInterval);
+                  }
+            },
       }
 </script>
 

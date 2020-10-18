@@ -8,12 +8,142 @@ layout: ArticleDetail
 
 ### JS：AJAX原理及各种封装
 
-原生js创建ajax对象：
+原生js发送HTTP请求：
 
 ~~~js
-let o = window.XMLHttpRequest ?
+// 兼容问题：IE5/IE6使用ActiveX
+let xhr = window.XMLHttpRequest ?
     	new window.XMLHttpRequest :
 		new ActiveXObject('Microsoft.XMLHTTP')
+
+/** 发送设置
+	method：请求方式
+	url：请求地址
+	async：是否异步
+*/
+xhr.open('GET','url',true)
+
+/** 当 XMLHttpRequest.readyState 属性发生变化，调用相应的处理函数
+	state表示响应中的数字状态码
+	readyState表示XMLHttpRequest当前状态，有五个值：
+	0：请求未初始化
+	1：服务器连接已建立
+	2：请求已接受
+	3：请求处理中
+	4：请求已完成，且相应已就绪
+*/
+xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4 && xhr.status === 200){
+        let result = JSON.parse(xhr.responseText)
+    }
+}
+
+// GET请求发送请求
+xhr.send()
+
+// POST请求发送请求
+// 设置Header告诉服务器编码格式
+xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+// 传入的参数即发送的数据，格式为字符串而非对象
+xhr.send('a=1&b=2&c=3')
+~~~
+
+简单封装：
+
+~~~js
+const demo = (function(){
+    let xhr = window.XMLHttpRequest ?
+        new window.XMLHttpRequest :
+        new ActiveXObject('Microsoft.XMLHTTP')
+    
+    if(!xhr){
+        throw Error('当前浏览器不支持发起异步HTTP请求！')
+    }
+    
+    function formateDatas(obj){
+        let str = ''
+        for(let key in obj){
+            str += key + '=' + obj[key] + '&'
+        }
+        return str.replace(/&$/, '')
+    }
+    
+    function _doAjax(opt){
+        let opt = opt || {},
+            type = (opt.type || 'GET').toUpperCase(),
+            async = opt.async || true,
+            url = opt.url,
+            data = opt.data || null,
+            error = opt.error || function(){},
+            success = opt.success || function(){},
+            complete = opt.complete || function(){}
+        
+        if(!url){
+            throw new Error('未填写URL！')
+        }
+        
+        xhr.open(type, url, async)
+        // post请求时需要设置请求头
+        type === 'POST' && xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+        
+        xhr.send(type === 'GET' ? null : formateDatas(data))
+        
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                success(JSON.parse(xhr.responseText))
+            }
+            
+            else if(xhr.status === 404){
+                error()
+            }
+            complete()
+        }
+    }
+    
+    return {
+        ajax: function(opt){
+            _doAjax(opt)
+        },
+        post: function(url, data, success){
+            _doAjax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: success
+            })
+        },
+        get: function(url, success){
+            _doAjax({
+                type: 'GET',
+                url: url,
+                success: success
+            })
+        }
+    }
+})
+~~~
+
+
+
+### JS：声明式渲染的简单实现
+
+实现{{ xxx }}将数据渲染进DOM，原理：获取DOM元素的InnerHTML，使用**正则**识别{{}}并使用 `replace()` 函数进行替换
+
+~~~js
+// elem为作为模板的DOM元素
+// data为对应的数据
+function render(elem, data) {
+    let result = ''
+    let str = elem.innerHTML
+
+    data.forEach(element => {
+        result += str.replace(/{{(.*?)}}/g, (node, key) => {
+            return element[key.trim()]
+        })
+    });
+
+    elem.innerHTML = result
+}
 ~~~
 
 
@@ -364,7 +494,8 @@ export default xxx;
 导入：
 
 ~~~javascript
-import xxx as mod1 from './mod1';// './' 必须写，因为要使用webpack编译，需要遵循nodejs的规范
+// './' 必须写，因为要使用webpack编译，需要遵循nodejs的规范
+import xxx as mod1 from './mod1';
 
 import * from './xxx';
 import {a,b as num} from './xxx';
@@ -412,6 +543,31 @@ let Obj2 = {
 function add(first, second, ...remaining) {
 	return first + second + remaining.reduce((acc, curr) => acc + curr, 0);
 }
+~~~
+
+
+
+### 解构赋值
+
+可以从一个对象中取出各个属性，或是从一个数组中取出各个值：
+
+~~~js
+let [a, b] = [1, 2]
+// 结果：a=1, b=2
+
+let {c, d} = {
+    c: 'Tom',
+    d: 'Jerry'
+}
+// 结果：c='Tome', d='Jerry'
+
+let {e, f, ...rest} = {
+    e: 10, 
+    f: 20, 
+    g: 30, 
+    h: 40
+}
+// 结果：e=10, f=20, rest={g: 30, h: 40}
 ~~~
 
 

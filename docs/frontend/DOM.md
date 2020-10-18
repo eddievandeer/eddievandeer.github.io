@@ -232,7 +232,7 @@ main.addEventListener('wheel', onScroll, false)// 针对Chrome的非标准事件
 
 ### 原理
 
-- 使用canvas覆盖在<video>标签内容上，通过js绘制弹幕内容
+- 使用canvas覆盖在`<video>`标签内容上，通过js绘制弹幕内容
 - 使用 `getContext("2d")` 获取一个 `CanvasRenderingContext2D` 对象，使用它可以绘制到 `Canvas` 元素中
 - 使用CanvasRenderingContext2D对象中的 `font()` ， `fillStyle()` ， `fillText()` 方法设置字体属性，设置文字样式，绘制被填充的文字
 - 使用 `requestAnimationFrame()` 方法执行一个动画，传入一个回调函数控制下一帧的绘制
