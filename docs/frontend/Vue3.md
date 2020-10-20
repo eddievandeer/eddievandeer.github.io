@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # Vue3笔记
 
 ## setup函数

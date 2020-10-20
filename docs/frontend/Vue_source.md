@@ -1,3 +1,7 @@
+---
+layout: ArticleDetail
+---
+
 # Vue源码笔记
 
 ## 模板编译
