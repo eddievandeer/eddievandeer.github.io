@@ -16,7 +16,7 @@ HTTP 是超文本传输协议，也就是HyperText Transfer Protocol。
 
 ### HTTP 常见的状态码
 
- ![image](https://api2.mubu.com/v3/document_image/28295742-106c-437f-89ae-2a75c243ad8b-3807603.jpg)
+ ![image.png](https://i.loli.net/2020/10/18/owLxHgzqbEFU8k7.png)
 
 - 1xx
   - **属于提示信息，是协议处理中的一种中间状态，实际用到的比较少**
@@ -87,7 +87,7 @@ HTTP 是超文本传输协议，也就是HyperText Transfer Protocol。
 
 
 
-![image](https://api2.mubu.com/v3/document_image/d7da1cd4-c108-4c82-b3d3-d5eb9422b0f4-3807603.jpg)
+![image.png](https://i.loli.net/2020/10/18/pbhlrSgJYkBmRQL.png)
 
 
 

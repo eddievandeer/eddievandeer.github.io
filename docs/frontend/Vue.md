@@ -1069,5 +1069,3 @@ store.state.b // -> 获取moduleB 的状态
 ~~~
 
 
-
-## 6、Vue源码
