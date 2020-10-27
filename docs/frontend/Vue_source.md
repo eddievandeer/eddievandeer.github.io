@@ -10,7 +10,7 @@ layout: ArticleDetail
 
 ![image.png](https://i.loli.net/2020/10/25/W5HPJ4gNG7OKb2y.png)
 
-### 初始化
+### 初始化 init
 
 将创建Vue对象时传入的 `options` 对象和options中的 `data` 挂载到vm示例上
 
@@ -43,7 +43,7 @@ function initData(vm) {
     vm._data = data = typeof data == 'function' ? data.call(vm) : data || {}
 
     for (var key in data) {
-        // 代理
+        // 代理数据
         proxyData(vm, '_data', key)
     }
 
@@ -52,11 +52,15 @@ function initData(vm) {
 }
 ~~~
 
+将 `options` 以 `$options` 形式， `data` 以 `_data_` 形式，挂载在实例上
+
+![image.png](https://i.loli.net/2020/10/26/sOAYtQkwcy7pzH9.png)
 
 
-### 代理
 
-代理就是使用 `vm.xxx` 去获取或更改 `vm._data.xxx` ，
+### 代理 proxy
+
+代理就是使用 `vm.xxx` 去获取或更改 `vm._data.xxx` ，同时也将 `data` 上的所有属性挂载在实例上
 
 ~~~js
 function proxyData(vm, target, key) {
@@ -83,6 +87,145 @@ function proxy (target, sourceKey, key) {
     Object.defineProperty(target, key, sharedPropertyDefinition);
   }
 ~~~
+
+
+
+### 观察者 observer
+
+对data及其内部的属性进行观察，由于对对象和数组的处理方法不一样，需要分两部分处理：
+
+- 处理对象使用 `Object.defineProperty` 方法
+
+~~~js
+function observe(data) {
+    // 只观察引用类型，即对象或数组
+    if (typeof data !== 'object' || data === null) return
+    var ob
+    // 已被观察则返回data.__ob__，省去多余操作
+    if (data.__ob__ && data.__ob__ instanceof Observer) {
+        ob = data.__ob__;
+    }
+    else {
+        ob = new Observer(data)
+    }
+    return ob
+}
+
+function def(obj, key, val, enumerable) {
+    Object.defineProperty(obj, key, {
+        value: val,
+        enumerable: !!enumerable,
+        writable: true,
+        configurable: true
+    });
+}
+
+function Observer(data) {
+    // 将Observer对象挂载到被观察的对象上，标识是否已被观察
+    def(data, '__ob__', this);
+    if (Array.isArray(data)) {
+        data.__proto__ = arrMethods
+        observeArr(data)
+    }
+    else {
+        this.walk(data)
+    }
+}
+
+Observer.prototype.walk = function (data) {
+    var keys = Object.keys(data)
+    // 遍历data的所有key和value
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i],
+            value = data[key]
+
+        defineReactiveData(data, key, value)
+    }
+}
+~~~
+
+
+
+- 添加响应式数据处理
+
+~~~js
+function defineReactiveData(data, key, value) {
+    // 递归观察
+    observe(value)
+    Object.defineProperty(data, key, {
+        get() {
+            // 响应式数据获取
+            console.log('响应式数据获取: ', value);
+            return value
+        },
+        set(newValue) {
+            // 响应式数据设置
+            console.log('响应式数据设置');
+            if (newValue === value) return
+            // 观察新值
+            observe(newValue)
+            value = newValue
+        }
+    })
+}
+~~~
+
+
+
+- 若是数组，则需要对数组方法进行拦截
+
+~~~js
+// 存放所有会改变原数组的方法
+var ARR_METHODS = [
+    'push',
+    'pop',
+    'shift',
+    'unshift',
+    'splice',
+    'sort',
+    'reverse'
+]
+
+// 继承Array类
+var originArrMethods = Array.prototype,
+    arrMethods = Object.create(originArrMethods)
+
+// 遍历ARR_METHODS，一个一个重写里面的方法
+ARR_METHODS.forEach(m => {
+    arrMethods[m] = function () {
+        console.log('数组新方法', arguments);
+        var args = Array.prototype.slice.call(arguments),
+            rt = originArrMethods[m].apply(this, args)
+
+        var newArr
+
+        switch (m) {
+            case 'push':
+            case 'unshift':
+                newArr = args
+                break
+            case 'splice':
+                newArr = args.slice(2)
+                break
+            default:
+                break
+        }
+
+        newArr && observeArr(newArr)
+        return rt
+    }
+})
+
+function observeArr(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        observe(arr[i])
+    }
+}
+~~~
+
+重写所有会改变原数组的方法：
+
+![image.png](https://i.loli.net/2020/10/26/xrNTctaFl8PVBnI.png)
 
 
 
