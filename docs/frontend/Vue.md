@@ -185,7 +185,7 @@ var app = new Vue({
 
 生命周期图示
 
-![lifecycle](E:\文档\笔记\Vue系列\Vue基础笔记.assets\lifecycle.png)
+![lifecycle.png](https://i.loli.net/2020/10/27/JFDgCikB1eSQhIA.png)
 
 ### 1.2 版本2.6.0新增
 
