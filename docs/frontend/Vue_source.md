@@ -231,7 +231,88 @@ function observeArr(arr) {
 
 ## 模板编译
 
+### 原理流程图
+
 ![image.png](https://i.loli.net/2020/10/25/VsgfWzO1rAT2m8X.png)
+
+
+
+### 编译入口
+
+~~~js
+let inBrowser = typeof window !== 'undefined';
+
+Vue.prototype.$mount = function (el) {
+    const vm = this,
+          options = vm.$options
+
+    el = el && inBrowser ? document.querySelector(el) : undefined
+    vm.$el = el
+
+    if (!options.render) {
+        let template = options.template
+
+        if (!template && el) {
+            template = el.outerHTML
+        }
+
+        const render = compileToRenderFunction(template)
+        options.render = render
+    }
+}
+~~~
+
+
+
+### 构建AST树
+
+- 使用正则去匹配标签名、属性等：
+
+~~~js
+// 匹配属性：id="app" | id='app | id=app
+const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
+// 匹配标签名
+const ncname = `[a-zA-Z_][\\-\\.0-9_a-zA-Z]*`
+const qnameCapture = `((?:${ncname}\\:)?${ncname})`
+// 匹配开始标签：<div
+const startTagOpen = new RegExp(`^<${qnameCapture}`)
+// 匹配结束标签：> | />
+const startTagClose = /^\s*(\/?)>/
+// 匹配整个结束标签：</div>
+const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`)
+~~~
+
+- 
+
+~~~js
+function parseStartTag() {
+    let end,
+        attr
+
+    const start = html.match(startTagOpen)
+
+    if (start) {
+        const match = {
+            tagName: start[1],
+            attrs: []
+        }
+        advance(start[0].length)
+
+        while (!(end = html.match(startTagClose)) && (attr = html.match(attribute))) {
+            match.attrs.push({
+                name: attr[1],
+                value: attr[3] || attr[4] || attr[5]
+            })
+            advance(attr[0].length)
+        }
+
+        if (end) {
+            advance(end[0].length)
+            return match
+        }
+    }
+}
+~~~
 
 
 
