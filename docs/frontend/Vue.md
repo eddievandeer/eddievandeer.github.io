@@ -172,9 +172,9 @@ var app = new Vue({
 主要阶段
 
 - 挂载（初始化相关属性）
-  - beforeCreate
-  - created
-  - beforeMount
+  - beforeCreate：observer和event/watcher事件配置之前触发
+  - created：实例创建完成立即触发
+  - beforeMount：render渲染函数首次被调用时触发（**服务器端渲染期间不被调用**）
   - mounted：el被新创建的vm.$el替换，并挂载到实例上之后触发，常用于初始化
 - 更新（元素或组件的变更操作）
   - beforeUpdate

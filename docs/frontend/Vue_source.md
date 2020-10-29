@@ -239,6 +239,8 @@ function observeArr(arr) {
 
 ### 编译入口
 
+通过**el**或**template**或**render**来获取template
+
 ~~~js
 let inBrowser = typeof window !== 'undefined';
 
@@ -265,6 +267,8 @@ Vue.prototype.$mount = function (el) {
 
 
 ### 构建AST树
+
+通过获取的template来生成AST树（Abstract Syntax Tree）抽象语法树
 
 - 使用正则去匹配标签名、属性等：
 
