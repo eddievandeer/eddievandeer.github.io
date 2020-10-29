@@ -13,6 +13,18 @@ module.exports = {
                         },
                   },
             ],
+            [
+                  '@vssue/vuepress-plugin-vssue', {
+                        // 设置 `platform` 而不是 `api`
+                        platform: 'github-v4',
+                        locale: 'zh',
+                        // 其他的 Vssue 配置
+                        owner: 'eddievandeer',
+                        repo: 'eddievandeer.github.io',
+                        clientId: '5579bac4e0c957f94c2a',
+                        clientSecret: '94cd6518ee8874eb78e332f7f26cff8346414c58',
+                  },
+            ]
       ],
       head: [
             ['link', {
