@@ -6,7 +6,7 @@ layout: ArticleDetail
 
 ## 1、本地仓库
 
-### 1.1工作流程
+### 1.1 工作流程
 
 **Git的三个区域：**
 
@@ -30,7 +30,7 @@ layout: ArticleDetail
 
 
 
-### 1.2本地仓库操作
+### 1.2 本地仓库操作
 
 1. 首次下载使用需要先进行全局配置
 
@@ -68,7 +68,7 @@ layout: ArticleDetail
 
 
 
-### 1.3版本回退
+### 1.3 版本回退
 
 1. 查看版本，确定需要回退到的时间点
 
@@ -86,7 +86,7 @@ layout: ArticleDetail
 
    > git reset --hrad 提交编号（可以往前也可以往后）
 
-   注意：回退后使用查看版本指令无法查看所回退的版本之后的内容
+   **注意**：回退后使用查看版本指令无法查看所回退的版本之后的内容
 
 3. 查看历史操作
 
@@ -96,9 +96,25 @@ layout: ArticleDetail
 
 
 
+### 1.4 修改commit信息
+
+1. 修改还未push的commit：
+
+   > git commit --amend
+
+2. 修改最近一次push的commit：
+
+   > git commit --amend
+
+3. 修改历史提交记录：
+
+   > git rebase -i HEAD~6
+
+
+
 ## 2、连接远程仓库
 
-### 2.1基于HTTPS协议
+### 2.1 基于HTTPS协议
 
 1. 创建空目录
 
@@ -130,7 +146,7 @@ layout: ArticleDetail
 
 
 
-### 2.2基于SSH协议（推荐）
+### 2.2 基于SSH协议（推荐）
 
 1. 生成客户端公私钥
 
@@ -152,7 +168,7 @@ layout: ArticleDetail
 
 
 
-### 2.3分支管理
+### 2.3 分支管理
 
 1. 分支相关指令：
 
@@ -186,7 +202,7 @@ layout: ArticleDetail
 
    
 
-### 2.4冲突的产生与解决
+### 2.4 冲突的产生与解决
 
 1. 冲突产生原因：
 
@@ -208,7 +224,7 @@ layout: ArticleDetail
 
 ## 3、Git使用技能
 
-### 3.1Git图形管理工具
+### 3.1 Git图形管理工具
 
 **GitHub Desktop**
 
@@ -216,7 +232,7 @@ Github出品的软件，了解这个足够了，其他不想看。
 
 
 
-### 3.2忽略文件
+### 3.2 忽略文件
 
 1. 创建.gitignore文件，无文件名需使用命令行创建
 
