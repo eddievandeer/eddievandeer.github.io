@@ -102,13 +102,53 @@ layout: ArticleDetail
 
    > git commit --amend
 
+   
+
 2. 修改最近一次push的commit：
+
+   先修改commit的信息：
 
    > git commit --amend
 
+   再使用git pull拉取并合并分支：
+
+   > git pull
+
+   最后提交本次修改
+
+   > git push
+
+   
+
 3. 修改历史提交记录：
 
-   > git rebase -i HEAD~6
+   使用下列命令进入编辑页面（n表示要修改最近哪几条记录，如：n=2修改最近两条记录）
+   
+   > git rebase -i HEAD~n
+   
+   进入编辑页面后，将需要修改的commit信息前的 `pick` 改为 `edit` ，保存并退出
+   
+   然后编辑commit的信息：
+   
+   > git commit --amend
+   
+   编辑完成后合并分支：
+   
+   > git rebase --continue
+   
+   最后强制提交到远程仓库：
+   
+   > git push --force origin master
+
+
+
+附带vim的简单使用方法：
+
+- 启动后，vim处于Normal模式，在此模式中可输入命令
+- i  ==>  进入Insert模式，此时可以编辑文件内容
+- x  ==>  删除当前光标所在的字符
+- :wq  ==>  保存并退出，需要在输入完后回车
+- dd  ==>  删除当前行
 
 
 

@@ -172,7 +172,7 @@ function defineReactiveData(data, key, value) {
 
 
 
-- 若是数组，则需要对数组方法进行拦截
+- 若是数组，则需要对数组方法进行拦截，重写所有会改变原数组的方法
 
 ~~~js
 // 存放所有会改变原数组的方法
@@ -223,7 +223,7 @@ function observeArr(arr) {
 }
 ~~~
 
-重写所有会改变原数组的方法：
+重写所有会改变原数组的方法后：
 
 ![image.png](https://i.loli.net/2020/10/26/xrNTctaFl8PVBnI.png)
 
@@ -239,7 +239,7 @@ function observeArr(arr) {
 
 ### 编译入口
 
-通过**el**或**template**或**render**来获取template
+通过**el**或**template**或**render**来获取HTML模板（template）
 
 ~~~js
 let inBrowser = typeof window !== 'undefined';
@@ -266,9 +266,31 @@ Vue.prototype.$mount = function (el) {
 
 
 
+### 渲染函数编译入口
+
+生成渲染函数，需要先将HTML模板解析为AST树，再由AST树通过拼接字符串的方式去生成渲染函数的函数体字符串，最后通过 `new Function()` 传入函数题字符串来生成渲染函数
+
+~~~js
+function compileToRenderFunction(html) {
+    const ast = parseHtmlToAST(html),
+          code = ast ? generate(ast) : '_c("div")',
+          render = new Function(`
+              with(this){ return ${code} }
+		  `)
+
+    return render
+}
+~~~
+
+生成渲染函数的过程（第一个为HTML模板字符串）：
+
+![image.png](https://i.loli.net/2020/11/01/YWUldSJ3V9bkwri.png)
+
+
+
 ### 构建AST树
 
-通过获取的template来生成AST树（Abstract Syntax Tree）抽象语法树
+通过获取的template来生成AST树（Abstract Syntax Tree 抽象语法树）
 
 - 使用正则去匹配标签名、属性等：
 
@@ -286,37 +308,184 @@ const startTagClose = /^\s*(\/?)>/
 const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`)
 ~~~
 
-- 
+- 使用解析函数将HTML模板转换为AST树，工作原理：
+
+  从头开始匹配第一个标签或文本，每匹配到一次就将匹配到的标签或文本解析为一个AST树节点，并将其从HTML模板中删去；
+
+  若匹配到的是一个开始标签，则将标签名压入栈中；
+
+  若为结束标签，则对应的解析出的AST树节点将会以相应的父子关系添加进AST树中，然后继续从头匹配下一个标签或文本，直到HTML模板长度为0结束
 
 ~~~js
-function parseStartTag() {
-    let end,
-        attr
+function parseHtmlToAST(html) {
+    let text,
+        root,
+        currentParent,
+        stack = []
 
-    const start = html.match(startTagOpen)
+    while (html) {
+        let textEnd = html.indexOf('<')
+        // 以 < 开头时才去匹配标签
+        if (textEnd === 0) {
+            const startTagMatch = parseStartTag()
 
-    if (start) {
-        const match = {
-            tagName: start[1],
-            attrs: []
+            if (startTagMatch) {
+                start(startTagMatch.tagName, startTagMatch.attrs)
+                continue
+            }
+
+            const endTagMatch = html.match(endTag)
+
+            if (endTagMatch) {
+                advance(endTagMatch[0].length)
+                end(endTagMatch[1])
+                continue
+            }
         }
-        advance(start[0].length)
 
-        while (!(end = html.match(startTagClose)) && (attr = html.match(attribute))) {
-            match.attrs.push({
-                name: attr[1],
-                value: attr[3] || attr[4] || attr[5]
+        if (textEnd > 0) {
+            text = html.substring(0, textEnd)
+        }
+        if (text) {
+            advance(text.length)
+            chars(text)
+        }
+    }
+
+    // 通过开始标签（例如：<div）来匹配到每一个标签
+    function parseStartTag() {
+        let end,
+            attr
+
+        const start = html.match(startTagOpen)
+
+        // match()匹配失败时返回一个null
+        if (start) {
+            const match = {
+                tagName: start[1],
+                attrs: []
+            }
+            advance(start[0].length)
+
+            // 获取标签的所有属性
+            // 赋值语句会返回所赋给变量的值，以此判断是否匹配到相应内容
+            while (!(end = html.match(startTagClose)) && (attr = html.match(attribute))) {
+                match.attrs.push({
+                    name: attr[1],
+                    value: attr[3] || attr[4] || attr[5]
+                })
+                advance(attr[0].length)
+            }
+
+            if (end) {
+                advance(end[0].length)
+                return match
+            }
+        }
+    }
+
+    function advance(n) {
+        html = html.substring(n)
+    }
+
+    // 匹配到开始标签，则将该标签压入栈中
+    function start(tagName, attrs) {
+        const element = createASTElement(tagName, attrs)
+
+        if (!root) {
+            root = element
+        }
+
+        // 将当前节点存为currentParent，以便进入子节点后使用
+        currentParent = element
+        stack.push(element)
+    }
+
+    // 匹配到结束标签时，将该标签弹出栈，设置其父节点为当前父节点，并存入当前父节点的子节点数组中
+    function end(tagName) {
+        const element = stack.pop()
+        currentParent = stack[stack.length - 1]
+
+        if (currentParent) {
+            element.parent = currentParent
+            currentParent.children.push(element)
+        }
+    }
+
+    // 处理纯文本，直接存入当前父节点的子节点数组中
+    function chars(text) {
+        text = text.trim()
+
+        if (text.length > 0) {
+            currentParent.children.push({
+                type: 3,
+                text
             })
-            advance(attr[0].length)
         }
+    }
 
-        if (end) {
-            advance(end[0].length)
-            return match
+    // 生成AST树节点
+    function createASTElement(tagName, attrs) {
+        return {
+            tag: tagName,
+            type: 1,
+            children: [],
+            attrs,
+            parent
         }
+    }
+
+    return root
+}
+~~~
+
+解析过程中，HTML模板字符串的变化：
+
+![image.png](https://i.loli.net/2020/11/01/orisyTWQqSndBDG.png)
+
+栈内元素的变化情况：
+
+![image.png](https://i.loli.net/2020/11/01/GzdB1nKCP7TbmVZ.png)
+
+最终解析出的AST树：
+
+![image.png](https://i.loli.net/2020/11/01/3kqDV4CI2WhAiNl.png)
+
+
+
+### 虚拟DOM
+
+通过AST树解析出虚拟DOM，用 `patch()` 函数以打补丁的形式将虚拟DOM转换为真实的DOM
+
+~~~js
+function renderMixin(Vue) {
+    // 创建节点函数
+    Vue.prototype._c = function () {
+        return createElement(...arguments)
+    }
+
+    // 处理{{ }}中的值，若为对象则转为字符串
+    Vue.prototype._s = function (value) { 
+        if (value === null) return
+        return typeof value === 'object' ? JSON.stringify(value) : value
+    }
+
+    // 处理纯文本内容
+    Vue.prototype._v = function (text) {
+        return createTextVnode(text)
+    }
+
+    Vue.prototype._render = function () {
+        const vm = this,
+              render = vm.$options.render,
+              vnode = render.call(vm)
+
+        return vnode
     }
 }
 ~~~
+
+
 
 
 
