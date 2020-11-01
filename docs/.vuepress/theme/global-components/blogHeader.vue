@@ -6,6 +6,9 @@
 
 <script>
       import toolBar from '../components/toolBar'
+      import {
+            visibilityChange
+      } from '../util/utils'
       import '../styles/header.scss'
 
       export default {

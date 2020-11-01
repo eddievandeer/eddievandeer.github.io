@@ -20,6 +20,24 @@ function parseTitle(navConfig) {
     return result
 }
 
+function visibilityChange(document) {
+    let visibilityChange
+    if (typeof document.hidden !== 'undefined') {
+        visibilityChange = 'visibilitychange'
+    }
+    else if (typeof document.mozHidden !== 'undefined') {
+        visibilityChange = 'mozvisibilitychange'
+    }
+    else if (typeof document.msHidden !== 'undefined') {
+        visibilityChange = 'msvisibilitychange'
+    }
+    else if (typeof document.webkitHidden !== 'undefined') {
+        visibilityChange = 'webkitvisibilitychange'
+    }
+    return visibilityChange
+}
+
 export {
-    parseTitle
+    parseTitle,
+    visibilityChange
 }
