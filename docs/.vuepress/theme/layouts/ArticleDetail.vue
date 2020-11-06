@@ -5,6 +5,7 @@
             <div class="article">
                   <div class="article-detail">
                         <Content />
+                        <Valine></Valine>
                   </div>
             </div>
       </div>
