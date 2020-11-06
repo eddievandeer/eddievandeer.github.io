@@ -439,9 +439,9 @@ function parseHtmlToAST(html) {
 }
 ~~~
 
-解析过程中，HTML模板字符串的变化：
+解析过程中，HTML模板字符串的变化（部分）：
 
-![image.png](https://i.loli.net/2020/11/01/orisyTWQqSndBDG.png)
+![image.png](https://i.loli.net/2020/11/02/grMNlvusAHdWh4C.png)
 
 栈内元素的变化情况：
 
@@ -453,9 +453,28 @@ function parseHtmlToAST(html) {
 
 
 
+### 生成渲染函数
+
+~~~js
+function generate(el) {
+    let children = getChildren(el)
+    let code = `_c('${el.tag}', ${el.attrs.length > 0
+        ?
+        `${formatProps(el.attrs)}`
+        :
+        'undefined'
+        }${children ? `,${children}` : ''
+        })`
+
+    return code
+}
+~~~
+
+
+
 ### 虚拟DOM
 
-通过AST树解析出虚拟DOM，用 `patch()` 函数以打补丁的形式将虚拟DOM转换为真实的DOM
+通过AST树解析出虚拟DOM，再用 `patch()` 函数以打补丁的形式将虚拟DOM转换为真实的DOM
 
 ~~~js
 function renderMixin(Vue) {
