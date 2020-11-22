@@ -112,7 +112,7 @@ setup函数可以返回一个函数来作为渲染函数
 
 - 第二个参数是一个 `context` 对象，他抛出三个属性：**attrs**， **emit**， **slots**
 
-![image-20201119154106528](C:\Users\mi\AppData\Roaming\Typora\typora-user-images\image-20201119154106528.png)
+![image-20201119154106528](https://i.loli.net/2020/11/21/Qame3JFWV54biGn.png)
 
 在子组件中可使用 `context.emit` 来向父组件发送数据：
 
@@ -212,5 +212,30 @@ console.log(proxyObj);
 
 reactive()函数返回的是一个Proxy对象
 
-![image-20201119173335954](C:\Users\mi\AppData\Roaming\Typora\typora-user-images\image-20201119173335954.png)
+![image-20201119173335954](https://i.loli.net/2020/11/21/tA4HsOBIbEfz1je.png)
 
+
+
+### ref()
+
+传入一个值作为内部值（inner value），返回一个ref对象，该对象只有一个属性：`value` ，指向这个内部值
+
+~~~js
+const data = ref(0)
+
+console.log(data)
+~~~
+
+![image-20201121101711325](https://i.loli.net/2020/11/21/KnNHte8x7AXF1B3.png)
+
+若传入的值是一个对象，则该对象将会被reactive函数包装一下，使其变成深度响应式的数据
+
+~~~js
+let data = ref({
+    count: 0
+})
+
+console.log(data);
+~~~
+
+![image-20201121110820825](https://i.loli.net/2020/11/21/Nh1EHawP94xlRUX.png)
