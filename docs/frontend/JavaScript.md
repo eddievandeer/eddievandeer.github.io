@@ -148,17 +148,85 @@ function render(elem, data) {
 
 
 
-### JS：同步、异步执行原理
+### JS：事件循环（Event Loop）
 
 - 同步：同步任务都在主线程上执行，形成一个**执行栈**
-
-- 异步：js的异步是通过回调函数实现的，异步任务相关的回调函数添加到任务队列（或消息队列）中
-
+- 异步：
+  - js的异步是通过回调函数实现的，异步任务相关的回调函数添加到**消息队列**（或任务队列）中
+  - 使用Promise、async、await创建的异步操作会加入**微任务队列**
 - 执行机制：
   - 先执行**执行栈**中的同步任务
-  - 异步任务放入任务队列
-  - 执行栈中的所有同步任务执行完毕后，系统将按次序读取任务队列中的异步任务，结束异步任务的等待状态，进入执行栈开始执行
+  - 异步任务放入**消息队列**和**微任务队列**
+  - 执行栈中的所有同步任务执行完毕后，（按次序）先读取**微任务队列**中的异步任务并压入执行栈中执行，再去处理消息队列中的异步任务
   - 由于主线程不断的重复获取任务、执行任务、再获取任务、再执行，所以这种机制被称为事件循环（event loop）
+
+
+
+**字节跳动面试题：**
+
+~~~js
+// 写出下面这段代码打印的结果
+async function async1() {
+  console.log('async1 start');
+  await async2();
+  console.log('async1 end');
+}
+
+async function async2() {
+  console.log('async2 start');
+  return new Promise((resolve, reject) => {
+    resolve();
+    console.log('async2 promise');
+  })
+}
+
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+async1();
+
+new Promise(function(resolve) {
+  console.log('promise1');
+  resolve();
+}).then(function() {
+  console.log('promise2');
+}).then(function() {
+  console.log('promise3');
+});
+
+console.log('script end');
+
+// 答案
+script start
+async1 start
+async2 start
+async2 promise
+promise1
+script end
+promise2
+promise3
+async1 end
+setTimeout
+~~~
+
+**面试题解析**：
+
+1. console.log('script start') 压入执行栈并执行弹出，打印 **script start**
+2. setTimeout() 压入执行栈，其中的回调函数进入消息队列，弹出setTimeout()
+3. async1() 压入执行栈，再将console.log('async1 start') 压入执行栈并执行弹出，打印 **async1 start**
+4. 遇到await时，在执行完右边的表达式后，会先让出线程，执行外部同步代码（即跳出当前的async1()），阻塞后面的console.log('async1 end')
+5. 执行await后的表达式，async2() 压入执行栈，再将console.log('async2 start') 压入执行栈并执行弹出，打印 **async2 start**
+6. Promise() 构造函数压入执行栈，再将resolve()，console.log('async2 promise') 压入执行栈，执行并弹出，打印 **async2 promise**
+7. async2() 弹出，同时跳出async1()，执行后续代码
+8. Promise() 构造函数压入执行栈，console.log('async2 promise')，resolve() 压入执行栈，执行并弹出，打印 **promise1**
+9. Promise 后面两个then() 的回调函数进入微任务队列中
+10. console.log('script end') 压入执行栈并执行弹出，打印 **script end**
+11. 此时调用栈为空，回到async1() ，console.log('async1 end') 进入微任务队列
+12. 将微任务队列中的任务压入调用栈执行并弹出，依次打印 **promise2** 、 **promise3** 和 **async1 end**
+13. 微任务队列中的任务执行完后，处理消息队列中的任务，打印 **setTimeout**
 
 
 
