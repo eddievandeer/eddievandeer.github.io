@@ -159,8 +159,10 @@
             color: $primary-background;
       }
 
-      .show-list {
-            color: $primary-background;
+      .mobile-bar-list {
+            .show-list {
+                  color: $primary-background;
+            }
       }
 }
 
