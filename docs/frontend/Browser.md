@@ -43,9 +43,3 @@ CSSOM是一组允许JavaScript操作CSS的API，类似于DOM
 - 将DOM和CSSOM合并为渲染树(rendering tree)，同时display:none的元素不在该树中
 - 布局（回流），即让利浏览器弄清楚各个节点在页面的确切位置和大小
 - 调用GPU绘制、合成图层，显示在屏幕上
-
-
-
-
-
-<Vssue />
