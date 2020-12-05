@@ -1,6 +1,7 @@
 <template>
       <div class="theme-container">
             <blog-header></blog-header>
+            <blog-index></blog-index>
             <div class="content" id="wrapper">
                   <h1 id="part-1">404</h1>
                   <blockquote id="part-2">{{ getMsg }}</blockquote>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+      import blogIndex from '../components/blogIndex'
       const msgs = [
             `There's nothing here.`,
             `How did we get here?`,
@@ -21,6 +23,9 @@
       ]
 
       export default {
+            components: {
+                  blogIndex
+            },
             mounted() {
                   let wrap = document.querySelector('#wrapper');
 

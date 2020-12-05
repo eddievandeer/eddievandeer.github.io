@@ -16,39 +16,24 @@
 </script>
 
 <style lang="scss" scoped>
-      @import '../styles/values.scss';
+      // @import '../styles/values.scss';
 
-      .index-container {
-            font-size: 16px;
-            width: 20rem;
-            z-index: 10;
-            margin: 0;
-            padding: 0 15px;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            bottom: 0;
-            box-sizing: border-box;
-            border-right: 1px solid #eaecef;
-            overflow-y: scroll;
+      // .index-container {
+      //       font-size: 16px;
+      //       width: 20rem;
+      //       z-index: 10;
+      //       margin: 0;
+      //       padding: 0 15px;
+      //       position: fixed;
+      //       top: 60px;
+      //       left: 0;
+      //       bottom: 0;
+      //       box-sizing: border-box;
+      // }
 
-            &::-webkit-scrollbar {
-                  width: 8px;
-                  height: 8px;
-            }
-
-            &::-webkit-scrollbar-track {
-                  background-color: #adadad3f;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                  background-color: #cacaca;
-            }
-      }
-
-      @media screen and (max-width: 768px) {
-            .index-container {
-                  display: none;
-            }
-      }
+      // @media screen and (min-width: 768px) {
+      //       .index-container {
+      //             display: none;
+      //       }
+      // }
 </style>

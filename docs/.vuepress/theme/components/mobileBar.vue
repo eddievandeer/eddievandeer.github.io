@@ -1,6 +1,10 @@
 <template>
       <div class="mobile-bar">
-            <mobile-list></mobile-list>
+            <div class="mobile-bar-list" @click="controlList" @mouseleave="hideList">
+                  <button class="show-list">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                  </button>
+            </div>
             <div class="home-link">
                   <a href="/">
                         <h2 class="title">首页</h2>
@@ -10,17 +14,22 @@
 </template>
 
 <script>
-      import mobileList from './mobileList'
-
       export default {
+            neme: 'mobileBar',
             data() {
                   return {
 
                   }
             },
-            neme: 'mobileBar',
-            components: {
-                  mobileList
+            methods: {
+                  controlList() {
+                        let list = document.querySelector('.list-container')
+                        list.classList.toggle('hide')
+                  },
+                  hideList() {
+                        let list = document.querySelector('.list-container')
+                        list.classList.add('hide')
+                  },
             }
       }
 </script>
@@ -30,6 +39,18 @@
 
       .mobile-bar {
             display: none;
+
+            .mobile-bar-list {
+                  position: absolute;
+                  padding: .6rem;
+                  top: .6rem;
+                  left: 1rem;
+
+                  .show-list {
+                        color: $word-color;
+                        font-size: 20px;
+                  }
+            }
 
             .home-link {
                   @extend .flex;

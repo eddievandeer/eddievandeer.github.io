@@ -1,6 +1,7 @@
 <template>
       <div class="theme-container">
             <blog-header></blog-header>
+            <blog-index></blog-index>
             <div class="about">
                   <Content />
             </div>
@@ -11,8 +12,13 @@
 
 <script>
       import blogArticles from '../components/blogArticles'
+      import blogIndex from '../components/blogIndex'
 
       export default {
+            components: {
+                  blogArticles,
+                  blogIndex
+            },
             data() {
                   return {
                         pages: [],
@@ -44,9 +50,6 @@
             },
             watch: {
                   '$route': 'pageChange'
-            },
-            components: {
-                  blogArticles
             }
       }
 </script>

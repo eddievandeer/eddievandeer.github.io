@@ -1,6 +1,6 @@
 <template>
     <div class="list-container hide">
-        <div class="list-item" v-for="index in titles.length" :key="index">
+        <div class="list-item" v-for="index in titles.length" :key="index" :class="{active: index-1==activeIndex}">
             <a v-if="titles[index - 1].url" :target="titles[index - 1].level == 3 ? '__blank' : ''"
                 :href="titles[index - 1].url" :class="setLevel(titles[index - 1].level)">
                 <p>{{ titles[index - 1].title }}</p>
@@ -18,9 +18,11 @@
     } from "../util/utils";
 
     export default {
+        name: "titleList",
         data() {
             return {
                 titles: [],
+                activeIndex: -1
             };
         },
         methods: {
@@ -28,28 +30,24 @@
                 let index_level = "index-level-";
                 return index_level + level;
             },
-            setActive(index) {
-                let el = document.querySelectorAll(".list-item");
-                if (typeof index == "number") {
-                    for (let i = 0; i < el.length; i++) {
-                        el[i].classList.remove("active");
-                    }
-                    el[index].classList.add("active");
-                    if (el[index + el.length / 2]) {
-                        el[index + el.length / 2].classList.add("active");
-                    }
-                }
-            },
             onScroll() {
-                let scrolled =
-                    document.documentElement.scrollTop || document.body.scrollTop;
-                let allHash = document.querySelectorAll(".header-anchor");
-                if (!allHash) {
-                    return;
-                }
-                for (let i = 2; i < allHash.length; i++) {
-                    if (scrolled <= allHash[i].offsetTop - 100) {
-                        this.setActive(i - 2);
+                const scrolled = Math.max(
+                    window.pageYOffset,
+                    document.documentElement.scrollTop,
+                    document.body.scrollTop
+                )
+                // let scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+
+                const allTitles = document.querySelectorAll(".content__default h2,h3");
+
+                for (let i = 0; i < allTitles.length; i++) {
+                    const title = allTitles[i]
+                    const nextTitle = allTitles[i + 1]
+
+                    if (i === 0 && scrolled === 0 ||
+                        scrolled >= title.offsetTop - 20 &&
+                        (!nextTitle || scrolled < title.offsetTop + 20)) {
+                        this.activeIndex = i
                         break;
                     }
                 }
@@ -58,15 +56,17 @@
         mounted() {
             this.titles = parseTitle(this.$navConfig);
             let url = window.location.pathname.split("/")[1];
+            // console.log(url);
             if (this.$page.headers) {
-                this.titles = this.$page.headers;
+                this.activeIndex = 0
+                this.titles = this.$page.headers
+                // this.titles.push(...this.$page.headers);
             }
             if (!this.titles[0].url) {
-                this.setActive(0);
+                // this.onScroll()
                 window.addEventListener("scroll", this.onScroll);
             }
-        },
-        name: "titleList",
+        }
     };
 </script>
 
@@ -109,8 +109,8 @@
             margin: 10px 0;
             border-bottom: 1px solid #d1d1d1;
             background-color: $primary-background;
-            transition-property: box-shadow, border-radius, background-color;
-            transition-duration: 0.2s, 0.2s, 0.2s;
+            transition-property: box-shadow, background-color;
+            transition-duration: 0.2s, 0.2s;
             transition-timing-function: ease-in-out;
 
             a {
