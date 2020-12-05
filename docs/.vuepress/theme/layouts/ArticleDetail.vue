@@ -1,7 +1,7 @@
 <template>
       <div class="theme-container">
             <blog-header></blog-header>
-            <blog-index></blog-index>
+            <blog-index :sidebar="true"></blog-index>
             <div class="article">
                   <div class="article-detail">
                         <Content />

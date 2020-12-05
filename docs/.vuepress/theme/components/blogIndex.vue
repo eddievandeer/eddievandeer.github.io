@@ -1,6 +1,6 @@
 <template>
       <div class="index-container">
-            <title-list></title-list>
+            <title-list :sidebar="sidebar"></title-list>
       </div>
 </template>
 
@@ -9,6 +9,7 @@
 
       export default {
             name: 'blogIndex',
+            props: ['sidebar'],
             components: {
                   titleList
             }

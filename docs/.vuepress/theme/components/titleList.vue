@@ -1,5 +1,5 @@
 <template>
-    <div class="list-container hide">
+    <div class="list-container" :class="{hide: !sidebar}">
         <div class="list-item" v-for="index in titles.length" :key="index" :class="{active: index-1==activeIndex}">
             <a v-if="titles[index - 1].url" :target="titles[index - 1].level == 3 ? '__blank' : ''"
                 :href="titles[index - 1].url" :class="setLevel(titles[index - 1].level)">
@@ -19,6 +19,7 @@
 
     export default {
         name: "titleList",
+        props: ['sidebar'],
         data() {
             return {
                 titles: [],
@@ -154,10 +155,11 @@
             }
         }
 
-        @media screen and (max-width: 768px) {
-            &.hide {
-                transform: translateX(-320px);
-            }
+        // @media screen and (max-width: 768px) {
+        &.hide {
+            transform: translateX(-320px);
         }
+
+        // }
     }
 </style>
