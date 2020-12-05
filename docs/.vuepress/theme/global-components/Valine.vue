@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="valine-vuepress-comment"></div>
-        <span id="<Your/Path/Name>" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <span :id="url" class="leancloud_visitors" data-flag-title="Your Article Title">
             <em class="post-meta-item-text">阅读量 </em>
             <i class="leancloud-visitors-count"></i>
         </span>
@@ -11,7 +11,15 @@
 <script>
     export default {
         name: 'Valine',
+        data() {
+            return {
+                url: ''
+            }
+        },
         mounted() {
+            let urls = window.location.pathname.split("/");
+            this.url = '/' + urls[1] + '/' + urls[2];
+            console.log(this.url);
             import('valine').then(Valine => {
                 new Valine.default({
                     el: '#valine-vuepress-comment',
