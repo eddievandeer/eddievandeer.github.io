@@ -75,7 +75,7 @@
     @import "../styles/values.scss";
 
     .list-container {
-        z-index: 10;
+        z-index: 20;
         width: 320px;
         height: calc(100vh - 60px);
         font-size: 16px;

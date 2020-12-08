@@ -2,21 +2,34 @@
       <div class="theme-container">
             <blog-header></blog-header>
             <blog-index :sidebar="true"></blog-index>
-            <div class="article">
+            <div class="article" @click="togglePagination()">
                   <div class="article-detail">
                         <Content />
                         <Valine></Valine>
                   </div>
             </div>
+            <pagination :style="{opacity:showPagination?0:1}"></pagination>
       </div>
 </template>
 
 <script>
       import blogIndex from '../components/blogIndex'
+      import Pagination from '../components/Pagination'
 
       export default {
             components: {
                   blogIndex,
+                  Pagination
+            },
+            data() {
+                  return {
+                        showPagination: false
+                  }
+            },
+            methods: {
+                  togglePagination() {
+                        this.showPagination = !this.showPagination
+                  }
             }
       }
 </script>
