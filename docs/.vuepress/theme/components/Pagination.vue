@@ -11,7 +11,18 @@
 
 <script>
     export default {
-        name: 'Pagination'
+        name: 'Pagination',
+        props: ['pages'],
+        data() {
+            return {
+                prePath: '',
+                nextPath: ''
+            }
+        },
+        mounted() {
+            const nowPage = this.$page.path
+            this.pages
+        }
     }
 </script>
 
