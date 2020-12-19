@@ -8,13 +8,16 @@
                         <Valine></Valine>
                   </div>
             </div>
-            <pagination :style="{opacity:showPagination?0:1}"></pagination>
+            <pagination :style="{opacity:showPagination?0:1}" :pages="pages"></pagination>
       </div>
 </template>
 
 <script>
       import blogIndex from '../components/blogIndex'
       import Pagination from '../components/Pagination'
+      import {
+            parsePage
+      } from '../util/utils'
 
       export default {
             components: {
@@ -23,12 +26,17 @@
             },
             data() {
                   return {
-                        showPagination: false
+                        showPagination: false,
+                        pages: []
                   }
+            },
+            mounted() {
+                  this.pages = parsePage(this.$site.pages, this.$page.path)
             },
             methods: {
                   togglePagination() {
                         this.showPagination = !this.showPagination
+                        console.log(this.$site);
                   }
             }
       }
