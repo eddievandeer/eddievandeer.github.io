@@ -1,10 +1,16 @@
 <template>
-    <div>
+    <div class="valine-body">
+        <div class="footer">
+            <span :id="url" class="leancloud_visitors" data-flag-title="Your Article Title">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count"></i>
+            </span>
+            <div class="last-updated">
+                <span class="prefix">上次更新：</span>
+                <span class="time">{{lastModifiedTime}}</span>
+            </div>
+        </div>
         <div id="valine-vuepress-comment"></div>
-        <span :id="url" class="leancloud_visitors" data-flag-title="Your Article Title">
-            <em class="post-meta-item-text">阅读量 </em>
-            <i class="leancloud-visitors-count"></i>
-        </span>
     </div>
 </template>
 
@@ -13,12 +19,14 @@
         name: 'Valine',
         data() {
             return {
-                url: ''
+                url: '',
+                lastModifiedTime: ''
             }
         },
         mounted() {
             let urls = window.location.pathname.split("/");
             this.url = '/' + urls[1] + '/' + urls[2];
+            this.lastModifiedTime = document.lastModified;
             console.log(this.url);
             import('valine').then(Valine => {
                 new Valine.default({
@@ -91,7 +99,26 @@
 </script>
 
 <style lang="scss" scoped>
-    #valine-vuepress-comment {
+    .valine-body {
         margin-top: 80px;
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+
+            .last-updated {
+
+                .prefix {
+                    color: #4e6e8e;
+                }
+
+                .time {
+                    color: #767676;
+                    font-weight: 400;
+                }
+            }
+        }
     }
 </style>
