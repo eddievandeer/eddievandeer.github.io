@@ -9,6 +9,9 @@ module.exports = [
         text: '画册', link: '/album/'
     },
     {
+        text: '面试', link: '/interview'
+    },
+    {
         text: '工具箱',
         items: [
             {
@@ -30,8 +33,5 @@ module.exports = [
                 text: '取色板', link: 'https://flatuicolors.com/', target: '_blank'
             }
         ]
-    },
-    {
-        text: '关于', link: '/about'
     }
 ]
