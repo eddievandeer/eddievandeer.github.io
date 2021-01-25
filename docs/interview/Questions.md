@@ -26,7 +26,7 @@ let _default = 0
 
 // a未定义，因此挂载在window上
 // 覆盖window对象的a属性的取值行为
-Object.difineProperty(window, 'a', {
+Object.defineProperty(window, 'a', {
     get(){
         return ++_default
     }
