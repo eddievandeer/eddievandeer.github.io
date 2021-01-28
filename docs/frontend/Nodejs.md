@@ -153,7 +153,23 @@ npm uninstall -g <package_name>
 从 `node_modules` 中移除要删除的包，同时将 `package.json` 中 `dependencies` 的相应内容删除,命令：
 
 ~~~bash
+# 通过包名删除对应的包
 npm uninstall <package_name>
+
+# 删除包的同时，将其从package.json文件中删除
+npm uninstall <package_name> --save
+~~~
+
+
+
+### 2.5 设置镜像
+
+~~~bash
+# 设置淘宝镜像
+npm config set registry https://registry.npm.taobao.org
+
+# 恢复默认
+npm config set registry https://registry.npmjs.org
 ~~~
 
 
