@@ -222,9 +222,17 @@
             .blog-description {
                   margin-top: 80px !important;
 
+                  h1 {}
+
                   p {
                         width: 80%;
                   }
+            }
+      }
+
+      @media screen and (max-width: 320px) {
+            .blog-description h1 {
+                  font-size: 40px;
             }
       }
 </style>
