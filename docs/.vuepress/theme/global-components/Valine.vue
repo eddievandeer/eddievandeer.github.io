@@ -93,7 +93,7 @@
                     }
                 })
             })
-            import('../styles/valineStyle.scss')
+            // import('../styles/valineStyle.scss')
         }
     }
 </script>
