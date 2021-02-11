@@ -423,3 +423,61 @@ export default ({
 }
 ~~~
 
+
+
+## 7、使用Github Actions持续集成服务
+
+创建仓库后，仓库顶部的菜单会出现 `Actions` 一项，如下图所示：
+
+![image-20210209220630248](https://i.loli.net/2021/02/09/s5eFwTaPY2pO94S.png)
+
+
+
+使用该服务需要 GitHub 密钥，参照[官方文档](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)来生成一个密钥
+
+生成完密钥后，进入到Settings下的Secrets，点击右上角的按钮将密钥储存到当前仓库的 `Settings/Secrets` 里面
+
+![image-20210209222552103](https://i.loli.net/2021/02/09/lNMJWFO1jpRH9Uy.png)
+
+
+
+这个环境变量的名字可以随便起，这里我用的是 `ACCESS_TOKEN` ，如果命名和我不一样，则在后续的脚本编写中，变量的名字也要换成自己的变量名。在Value中填入刚刚生成的密钥内容，然后点击 `Add secret` 添加环境变量
+
+![image-20210209222937086](https://i.loli.net/2021/02/09/yBcs3CKzqdUjfIV.png)
+
+打开项目根目录下的 `package.json` 文件，添加一个 `homepage` 字段，以此来指定项目发布后的根目录
+~~~json
+"homepage": "https://[username].github.io/[repository]"
+~~~
+
+在项目根目录下创建 `.github/workflows` 目录，在目录下创建一个 `.yml` 文件，该文件的命名没有要求，文件内容可参考如下我使用的 `Action` ：
+~~~yml
+name: Build and Deploy
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run docs:build
+        env:
+          CI: false
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: myblog
+          FOLDER: docs/.vuepress/dist
+~~~
+此处我是将编译后的应用放在了 `myblog` 分支上，如有需要可以自行更改倒数第二行的 `BRANCH` 的值
+
+最后使用 `git add .`，`git commit -m "message"`，`git push` 将项目提交，即可在每次提交的时候执行上述的 `Action` ，将源项目编译后提交至myblog分支上，设置Github Pages的Source为提交的分支，即可在 **https://[username].github.io/[repository]** 上访问到搭建的博客网站
+
