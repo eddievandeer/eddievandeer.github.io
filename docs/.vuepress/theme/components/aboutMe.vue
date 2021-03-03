@@ -1,6 +1,6 @@
 <template>
       <div class="about-me" id="about">
-            <div>
+            <div class="about-content">
                   <Content />
             </div>
             <my-works></my-works>
@@ -26,6 +26,14 @@
             width: 100%;
             height: 100vh;
             margin-top: 60px;
+            padding-top: 2rem;
             @extend .flex;
+
+            .about-content {
+                  width: 50%;
+                  height: 100%;
+                  justify-content: center;
+                  align-items: center;
+            }
       }
 </style>
