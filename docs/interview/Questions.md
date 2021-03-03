@@ -210,7 +210,7 @@ new new Foo().getName()
 
 ## 第四题
 
-**事件循环**
+### 事件循环
 
 > 字节跳动面试题：
 
@@ -277,4 +277,127 @@ setTimeout
 11. 此时调用栈为空，回到async1() ，console.log('async1 end') 进入微任务队列
 12. 将微任务队列中的任务压入调用栈执行并弹出，依次打印 **promise2** 、 **promise3** 和 **async1 end**
 13. 微任务队列中的任务执行完后，处理消息队列中的任务，打印 **setTimeout**
+
+
+
+## 三道阿里面试题
+
+### 第一题
+
+**题目：**
+
+~~~js
+/* 计算多个区间的交集
+ * 区间用长度为2的数字数组表示，如[2, 5]表示区间2到5（包括2和5）
+ * 区间不限定方向，如[5, 2]等同于[2, 5]
+ * 实现 getIntersection 函数
+ * 可接收多个区间，并返回所有区间的交集（用交集表示），如空集用null表示
+ */
+~~~
+
+**解答：**
+
+~~~js
+// 通过arguments对象，获取输入的所有区间(参数)
+function getIntersection() {
+    let intersection = arguments[0]
+
+    if (arguments.length <= 1) return intersection
+
+    for (let i = 1; i < arguments.length; i++) {
+        let section = arguments[i]
+
+        let iMax = Math.max(...intersection)
+        let iMin = Math.min(...intersection)
+
+        // 两个区间最小值的最大值即是交集的最小值
+        intersection[0] = Math.max(Math.min(...section), iMin)
+        // 两个区间最大值的最小值即是交集的最大值
+        intersection[1] = Math.min(Math.max(...section), iMax)
+
+        if (intersection[0] > intersection[1]) return null
+    }
+
+    return intersection
+}
+~~~
+
+
+
+### 第二题
+
+**题目：**
+
+~~~jsx
+/** 
+ * DOM 的体积过大会影响页面性能，假如你想在用户关闭页面时统计（计算并反馈给服务器）当前页面中元素节点的数量总和、元素节点的最大嵌套深度以及最大子元素个数，请用 JS 配合原生 DOM API 实现该需求（不用考虑陈旧浏览器以及再现代浏览器中的兼容性，可以使用任意浏览器的新特性；不用考虑 shadow DOM）。比如在如下页面中运行后：
+*/
+<html>
+  <head></head>
+  <body>
+    <div>
+      <span>f</span>
+      <span>o</span>
+      <span>o</span>
+    </div>
+  </body>
+</html>
+// 会输出：
+
+{
+  totalElementsCount: 7,
+  maxDOMTreeDepth: 4,
+  maxChildrenCount: 3
+}
+~~~
+
+**解答：**
+
+~~~js
+const result = {
+    totalElementsCount: 0,
+    maxDOMTreeDepth: 0,
+    maxChildrenCount: 0
+}
+
+function doStatistics() {
+    const root = document.documentElement
+
+    result.maxDOMTreeDepth = handler(root)
+    return result
+}
+
+function handler(node) {
+    const depths = []
+
+    result.totalElementsCount++
+
+    if (node.children.length > 0) {
+        const nodes = node.children
+
+        if (nodes.length > result.maxChildrenCount) {
+            result.maxChildrenCount = nodes.length
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+            depths.push(handler(nodes.item(i)))
+        }
+        return Math.max(...depths) + 1
+    } else {
+        return 1
+    }
+}
+~~~
+
+
+
+###  第三题
+
+**题目：**
+
+~~~js
+// 请使用原生代码实现一个 Events 模块，可以实现自定义事件的订阅、触发、移除功能
+~~~
+
+
 
