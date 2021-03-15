@@ -28,6 +28,24 @@ body {
 
 p {
       font-family: 'KaiTi_GB2312';
+
+      a {
+            color: $word-color-blue;
+            text-decoration: underline;
+
+            &:hover,
+            &:active {
+                  color: $word-color-blue-light;
+            }
+
+            &:focus {
+                  outline: none;
+            }
+      }
+
+      &:hover>a {
+            opacity: 1;
+      }
 }
 
 h1,
