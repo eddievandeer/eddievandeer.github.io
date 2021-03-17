@@ -93,10 +93,6 @@
 
                         this.scrollOffset = document.documentElement.scrollTop || document.body.scrollTop
 
-                        // this.inSlides = this.scrollOffset > about.offsetHeight
-                        // if (this.inSlides) {
-                        //       return
-                        // }
                         if (event.preventDefault) {
                               event.preventDefault()
                               event.stopPropagation()
@@ -215,14 +211,9 @@
       }
 
       @media screen and (max-width: 768px) {
-            // .blog-icon {
-            //       display: none;
-            // }
 
             .blog-description {
                   margin-top: 80px !important;
-
-                  h1 {}
 
                   p {
                         width: 80%;
