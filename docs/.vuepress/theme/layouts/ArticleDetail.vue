@@ -1,7 +1,7 @@
 <template>
       <div class="theme-container">
             <blog-header></blog-header>
-            <blog-index :sidebar="ifMobile()"></blog-index>
+            <blog-index :sidebar="!ifMobile"></blog-index>
             <div class="article" @click="togglePagination()">
                   <div class="article-detail">
                         <Content />
@@ -28,25 +28,20 @@
                   return {
                         showPagination: false,
                         pages: [],
-                        navigator: null
+                        ifMobile: false
                   }
             },
             mounted() {
-                  this.navigator = window.navigator
+                  const Reg =
+                        /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i
+
                   this.pages = parsePage(this.$site.pages, this.$page.path)
+
+                  navigator.userAgent && (this.ifMobile = Reg.test(navigator.userAgent))
             },
             methods: {
                   togglePagination() {
                         this.showPagination = !this.showPagination
-                  }
-            },
-            computed: {
-                  ifMobile() {
-                        const Reg =
-                              /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i
-
-                        // return navigator.platform.indexOf('Win') == 0
-                        return Reg.test(this.navigator.userAgent)
                   }
             }
       }
