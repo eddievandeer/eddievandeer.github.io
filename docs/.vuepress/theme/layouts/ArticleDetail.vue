@@ -27,10 +27,12 @@
             data() {
                   return {
                         showPagination: false,
-                        pages: []
+                        pages: [],
+                        navigator: null
                   }
             },
             mounted() {
+                  this.navigator = window.navigator
                   this.pages = parsePage(this.$site.pages, this.$page.path)
             },
             methods: {
@@ -44,7 +46,7 @@
                               /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i
 
                         // return navigator.platform.indexOf('Win') == 0
-                        return Reg.test(navigator.userAgent)
+                        return Reg.test(this.navigator.userAgent)
                   }
             }
       }
