@@ -24,16 +24,24 @@
 
       .about-me {
             width: 100%;
-            height: 100vh;
+            min-height: calc(100vh - 60px);
             margin-top: 60px;
             padding-top: 2rem;
             @extend .flex;
+            align-items: flex-start;
 
             .about-content {
                   width: 50%;
                   height: 100%;
+                  padding-top: 1rem;
                   justify-content: center;
                   align-items: center;
+            }
+
+            @media screen and (max-width: 768px) {
+                  .about-content {
+                        width: 80%;
+                  }
             }
       }
 </style>
