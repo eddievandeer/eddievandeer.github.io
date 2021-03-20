@@ -1,9 +1,7 @@
 <template>
       <div class="drop-container">
             <div class="down">
-                  <a href="#about">
-                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </a>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
             </div>
       </div>
 </template>
@@ -16,7 +14,14 @@
                   down.addEventListener('click', () => {
                         let header = document.querySelector('.blog-header')
                         header.classList.remove('hide')
+                        this.dropDown()
                   })
+            },
+            methods: {
+                  dropDown() {
+                        const about = document.querySelector('#about')
+                        window.scrollTo(0, about.scrollHeight)
+                  }
             }
       }
 </script>
@@ -40,14 +45,9 @@
             font-size: 45px;
             animation: anima 1.5s cubic-bezier(0.6, 0.04, 0.52, 1.01) infinite;
 
-            a {
-                  width: 100%;
-                  height: 100%;
+            i {
                   color: $primary-background;
-                  text-decoration: none;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
+                  cursor: pointer;
             }
       }
 
