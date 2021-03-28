@@ -121,33 +121,13 @@
                               header.classList.add('hide')
                         }
 
-                        this.interval = setTimeout((scrolled) => {
+                        this.interval = setTimeout(() => {
                               this.slidesLock = false
                         }, 500)
                   },
                   ifInSlide(deltaY, offset) {
                         let about = document.querySelector('#about')
                         return deltaY > 0 ? (-offset < about.offsetHeight - 1) : (-offset <= about.scrollHeight + 80)
-                  },
-                  gsScrollControl() {
-                        isScrolling = true;
-
-                        // scroll end
-                        if (scrollTimeCurrent > scrollTime) {
-                              if (scrollLockTime > 0) {
-                                    setTimeout(endScroll, scrollLockTime);
-                                    return;
-                              }
-                              endScroll();
-                              return;
-                        }
-
-                        let x = scrollTimeCurrent / scrollTime;
-                        let y = 1 - Math.pow(1 - x, scrollScale);
-                        scrollElement.scrollTop = scrollStart + y * scrollOffset;
-                        scrollTimeCurrent += scrollInterval;
-
-                        setTimeout(gsScrollControl, scrollInterval);
                   }
             },
       }
