@@ -84,7 +84,7 @@ layout: ArticleDetail
 
    指令：
 
-   > git reset --hrad 提交编号（可以往前也可以往后）
+   > git reset --head 提交编号（可以往前也可以往后）
 
    **注意**：回退后使用查看版本指令无法查看所回退的版本之后的内容
 
