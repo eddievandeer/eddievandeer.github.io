@@ -10,9 +10,11 @@ layout: ArticleDetail
 
 ![img](http://p0.qhimg.com/t01e1ff266d0b355d62.gif)
 
+图片和CSS这些资源一般不会阻塞HTML的解析，因为他们不会影响DOM的生成
+
 加载JS文件时阻塞：当浏览器构建 DOM 的时候，如果在 HTML 中遇到了一个 `<script>...</script>`标签，它必须立即执行。如果脚本是来自于外部的，那么它必须首先下载脚本。
 
-原因：因为脚本可以改变DOM，需要等脚本改变完再继续构建DOM，否则不安全
+原因：因为脚本可能改变DOM的结构，需要等脚本改变完再继续构建DOM，否则不安全
 
 ![img](http://p0.qhimg.com/t01e3b5f9d1aaa24fea.gif)
 
@@ -45,8 +47,14 @@ CSSOM是一组允许JavaScript操作CSS的API，类似于DOM
 
 浏览器渲染过程主要分五步：
 
-- 将HTML文档解析为DOM树
-- 处理CSS标记，构建CSSOM
-- 将DOM和CSSOM合并为渲染树(rendering tree)，同时display:none的元素不在该树中
-- 布局（回流），即让浏览器弄清楚各个节点在页面的确切位置和大小
+- 将HTML文档解析为DOM树：
+  - Tokeniser 标记化，将HTML内容解析为多个标记
+  - 根据识别后的标记进行DOM树构造
+  - 在构造过程中会创建document对象，然后在以document为根节点的树上进行各种元素的添加
+- 主线程解析CSS，并确定每个DOM节点的计算样式，构建CSSOM
+- 将DOM和CSSOM合并为渲染树(rendering tree)，同时display:none的元素不在该树中，而在伪元素 **::before** , **::after** 中添加了content值的元素会被添加在该树
+- layout布局（回流），即让浏览器弄清楚各个节点在页面的确切位置和大小
 - 调用GPU绘制、合成图层，显示在屏幕上
+
+参考：[浏览器的工作原理：新式网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
+
