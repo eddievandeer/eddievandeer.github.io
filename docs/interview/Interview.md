@@ -132,3 +132,159 @@
 不到二十分钟光速凉凉，不过也暴露出自身的很多问题，对前端开发还没有一个深刻的理解，也对自己未来的职业生涯没有规划，想的太少了
 
 webpack的学习也不够，对各种性能优化的手段都不了解
+
+
+
+### 美团 一面
+
+1. 自我介绍
+
+2. DOM有哪些常见的API
+
+3. 使用 insertBefore() 来实现在一个节点的后面插入节点
+
+   ~~~js
+   function insertAfter(newNode, referenceNode) {
+       const parentNode = referenceNode.parentNode
+       
+       if(parentNode.lastChild == referenceNode) {
+           parentNode.appendChild(newNode)
+       }
+       else {
+           parentNode.insertBefore(newNode, referenceNode.nextSibling)
+       }
+   }
+   ~~~
+
+4. 数组都有哪些操作方法，使用 split() 获取url参数
+
+   ~~~js
+   // 例：http://example.com?a=b&c=d，传入a返回a对应的值
+   function getValue(key, url) {
+       const query = url.split('?')[1]
+       const arr = query.split('&')
+       
+       for(let i = 0; i < arr.length; i++) {
+           const keyValue = arr[i].split('=')
+           if(key == keyValue[0]) return keyValue[1]
+       }
+   }
+   ~~~
+
+5. 栈和队列的区别，怎么用两个栈来实现一个队列
+
+   ~~~js
+   /* 入队顺序：1，2，3
+    * 放入第一个栈，再依次出栈，出栈顺序为：3，2，1
+    * 再放入第二个栈，依次出栈，出栈顺序为：1，2，3
+    * 以此来实现队列
+    */
+   // ES5构造函数实现如下
+   function myQueue() {
+       this.stack1 = []
+       this.stack2 = []
+       
+       this.shift = function() {
+           if(this.stack2.length == 0) {
+               let stack1Length = this.stack1.length
+               for(let i = 0; i < stack1Length; i++) {
+                   this.stack2.push(this.stack1.pop())
+               }
+           }
+           
+           return this.stack2.pop()
+       }
+       
+       this.push = function(item) {
+           this.stack1.push(item)
+       }
+   }
+   
+   // ES6类及私有变量实现如下
+   class myQueue {
+       constructor() {
+           const stack1 = []
+           const stack2 = []
+   
+           this.shift = function() {
+               if(stack2.length == 0) {
+                   let stack1Length = stack1.length
+                   for(let i = 0; i < stack1Length; i++) {
+                       stack2.push(stack1.pop())
+                   }
+               }
+   
+               return stack2.pop()
+           }
+   
+           this.push = function(item) {
+               stack1.push(item)
+           }
+       }
+   }
+   ~~~
+
+6. 讲一讲快速排序，再用js代码实现一下
+
+   找一个元素作为基准，其他元素依次与基准元素进行比较，比基准元素大的放在一边，比它小的放另一边，再进行递归处理分割出来的两个数组执行和上面一样的操作，一直分割直到分割出的数组长度为1
+
+   采用了分而治之的思想，平均时间复杂度为O(nlogn)，极端情况下退化为O(n²)
+
+   ~~~js
+   // 面试时一时没写出来，不过面试官看我流程讲得很流畅就跳过了
+   // 这里重新写一下，加深对快排的记忆
+   function quickSort(arr, startIndex = 0, endIndex = arr.length - 1) {
+       if(startIndex > endIndex) return
+       
+       let pivotIndex = partition(arr, startIndex, endIndex)
+       
+       quickSort(arr, startIndex, pivotIndex - 1)
+       quickSort(arr, pivotIndex + 1, endIndex)
+   }
+   
+   function partition(arr, startIndex, endIndex) {
+       let pivot = arr[startIndex]
+       let left = startIndex
+       let right = endIndex
+       
+       while(left < right) {
+           while(left < right && arr[right] > pivot) {
+               right--
+           }
+           while(left < right && arr[left] <= pivot) {
+               left++
+           }
+           
+           if(left < right) {
+               let temp = arr[left]
+               arr[left] = arr[right]
+               arr[right] = temp
+           }
+       }
+       
+       arr[startIndex] = arr[left]
+       arr[left] = pivot
+       
+       return left
+   }
+   ~~~
+
+7. 说一下HTTP有哪些请求类型，了解HTTP的缓存吗
+
+   参照饿了么一面，缓存没有了解。。
+
+8. 说一下你对cookie了解多少
+
+9. 你是怎么学习前端的，对前端的理解
+
+   之前被阿里问过，面试挂了后好好的思考过一段时间，算是提前做好了功课吧
+
+10. 能实习多久，课多不多，能不能接受到北京实习
+
+    这里感觉已经稳了，有点开心
+
+11. 有什么要问的吗
+
+    问了下前端现在都有哪些方向，想要参考着来规划接下来的学习
+
+    方向有数据可视化，跨端解决方案，nodejs等，但面试官建议我先不用着急往这种大的方向去考虑，先把基础打好打扎实了，有一说一确实应该如此，参考了面试官的建议决定继续看书学习
