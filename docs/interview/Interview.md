@@ -288,3 +288,235 @@ webpack的学习也不够，对各种性能优化的手段都不了解
     问了下前端现在都有哪些方向，想要参考着来规划接下来的学习
 
     方向有数据可视化，跨端解决方案，nodejs等，但面试官建议我先不用着急往这种大的方向去考虑，先把基础打好打扎实了，有一说一确实应该如此，参考了面试官的建议决定继续看书学习
+
+
+
+### 美团 二面
+
+这一次的面试持续了足足80多分钟，感觉问了好多东西，各个方面都有，有的地方是我熟悉或者擅长的，还没来得及讲就被面试官转移话题了，感觉有点亏（这里不是说面试官故意打断，是我没把握好面试节奏，没有很好的把话题往擅长的部分拉，面试官人很好），所以掌握好面试的节奏很重要
+
+1. 讲一下自己最近的学习
+
+   讲着讲着都在讲学习计划了，忘了讲现在的学习情况了。。。被面试官吐槽怎么都是TODO
+
+2. 为什么学习前端
+
+3. 实现一下两列布局
+
+   ~~~css
+   /* 面试的时候float写反了，写到right里了。。。 */
+   .left {
+       width: 300px;
+       height: 100%;
+       float: left;
+   }
+   
+   .right {
+       width: auto;
+       height: 100%;
+   }
+   
+   /* 第二种方法 */
+   .parent {
+       display: flex;
+   }
+   
+   .left {
+       width: 300px;
+       height: 100%;
+   }
+   
+   .right {
+       width: auto;
+       height: 100%;
+       flex: 1;
+   }
+   ~~~
+
+4. 问一道关于position的问题
+
+   已知A容器包含B容器，A是居中显示的，他的position是relative，B的position是absolute，top和left均为0， 问B的左上角会和哪里对齐？当 A的position变更为absolute时又会怎么样？
+
+   这道题面试完复盘的时候，发现有两种情况
+
+   ~~~css
+   /* 当使用这种方式给A居中时，A为relative时B在A的左上角 */
+   /* 当A为absolute时A和B都在body的左上角 */
+   body {
+       width: 100%;
+       height: 100vh;
+       display: flex;
+   }
+   
+   .a {
+       width: 300px;
+       height: 300px;
+       background-color: red;
+       margin: auto;
+       position: relative;
+   }
+   
+   .b {
+       width: 100px;
+       height: 200px;
+       background-color: green;
+       position: absolute;
+       top: 0;
+       left: 0;
+   }
+   
+   /* 当使用这种方式给A居中时，A不管为relative还是absolute，B在A的左上角且A还是居中 */
+   body {
+       width: 100%;
+       height: 100vh;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   
+   .a {
+       width: 300px;
+       height: 300px;
+       background-color: red;
+       position: relative;
+   }
+   
+   .b {
+       width: 100px;
+       height: 200px;
+       background-color: green;
+       position: absolute;
+       top: 0;
+       left: 0;
+   }
+   ~~~
+
+5. 知道雪碧图吗，他解决了什么问题
+
+6. 动画性能优化
+
+   这里是由我发起的，聊了会动画优化方面，transition，animation，transform，然后面试官又问我还知道哪些关于浏览器运行原理方面的知识吗，我回了浏览器的渲染原理
+
+7. 聊一聊你对原型这块的了解
+
+8. 实现一个函数，传入图片url获取图片的宽高
+
+   ~~~js
+   // 当时脑抽了就这么写了，面试官提醒了才发现应该等图片加载完
+   function getImageHeight(url) {
+       const image = new Image()
+       image.src = url
+       
+       document.body.appendChild(image)
+       
+       return {
+           height: image.style.height,
+           width: image.style.width
+       }
+   }
+   
+   // 加一个onLoad
+   function getImageHeight(url, result) {
+       const image = new Image()
+       image.src = url
+       
+       document.body.appendChild(image)
+       
+       image.addEventListener('load', () => {
+           result.height = image.style.height
+           result.width = image.style.width
+       })
+   }
+   ~~~
+
+9. 讲一讲Promise，或者手写一下看看
+
+   这边刚说最近在学习的过程中有手写过Promise，然后面试官就话题一转问了Promise.all()和Promise.race()，感觉有点可惜
+
+10. 谈一谈跨域，以及子页面和父页面的通信
+
+11. 去除数组中的重复元素
+
+    ~~~js
+    function reduce(arr) {
+        const set = new Set()
+        
+        for(let item of arr) {
+            set.add(item)
+        }
+        
+        return Array.from(set)
+    }
+    
+    // 经面试官提醒，可以一行代码直接解决
+    function reduce(arr) {
+        return Array.from(new Set(arr))
+    }
+    ~~~
+
+    不用Set或者Map，不用API来解决上述问题：
+
+    ~~~js
+    function reduce(arr) {
+        const result = []
+        result.push(arr[0])
+    
+        for(let i = 1; i < arr.length; i++) {
+            let exist = false
+            for(let j = 0; j < result.length; j++) {
+                if(result[j] == arr[i]) {
+                    exist = true
+                    break
+                }
+            }
+            if(!exist) result.push(arr[i])
+        }
+    
+        return result
+    }
+    
+    // 写完面试官问干嘛不用一个空对象，恍然大悟！
+    // 因为刚才说不能用map就把和map差不多的对象给忘了
+    function reduce(arr) {
+        const result = []
+        const obj = {}
+    
+        for(let i = 0; i < arr.length; i++) {
+            if(obj[arr[i]] == undefined) {
+                result.push(arr[i])
+            }
+            obj[arr[i]] = i
+        }
+    
+        return result
+    }
+    ~~~
+
+12. 给出一个数组，格式为 [{key:"key1",value:"1"},{key:"key2",value:2}] ，要求写一个函数，讲数组转换为如下格式的对象：{ key1:1, key2:2 }
+
+    ~~~js
+    const arr = [{key:"key1",value:"1"},{key:"key2",value:2}]
+    
+    // 遍历
+    function keyValue(arr) {
+        const result = {}
+        
+        for(let {key, value} of arr) {
+            result[key] = value
+        }
+        
+        return result
+    }
+    
+    // 使用reduce函数
+    function keyValue(arr) {
+        const reuslt = arr.reduce((pre, cur) => {
+            pre[cur[key]] = cur[value]
+            return pre
+        },{})
+        
+        return result
+    }
+    ~~~
+
+    
