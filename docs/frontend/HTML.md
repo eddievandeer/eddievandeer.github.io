@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-08-09
+wordCount: 370
+readTime: 1m
 ---
 
 # HTML笔记

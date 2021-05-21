@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-09-25
+wordCount: 4.4k
+readTime: 12m
 ---
 
 # Vue笔记
@@ -1067,5 +1070,4 @@ const store = new Vuex.Store({
 store.state.a // -> 获取moduleA 的状态
 store.state.b // -> 获取moduleB 的状态
 ~~~
-
 

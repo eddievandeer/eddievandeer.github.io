@@ -61,6 +61,10 @@
                               return v.path.endsWith('html') && v.regularPath.split('/')[1] == this.url
                         })
 
+                        filted.sort((a, b) => {
+                              return (new Date(b.frontmatter.postTime) - new Date(a.frontmatter.postTime))
+                        })
+
                         if (end > filted.length) end = filted.length
 
                         for (let i = start; i < end; i++) {

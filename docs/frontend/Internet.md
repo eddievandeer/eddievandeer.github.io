@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-09-08
+wordCount: 1.4k
+readTime: 4m
 ---
 
 # 互联网

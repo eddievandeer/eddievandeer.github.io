@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-08-09
+wordCount: 621
+readTime: 2m
 ---
 
 # 浏览器笔记

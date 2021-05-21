@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-08-09
+wordCount: 1.3k
+readTime: 4m
 ---
 
 # Git笔记

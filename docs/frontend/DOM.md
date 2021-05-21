@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-10-02
+wordCount: 1.5k
+readTime: 4m
 ---
 
 # DOM笔记

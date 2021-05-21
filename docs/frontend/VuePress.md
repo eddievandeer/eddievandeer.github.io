@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-08-13
+wordCount: 2.4k
+readTime: 6m
 ---
 
 # VuePress笔记

@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-11-22
+wordCount: 1.2k
+readTime: 3m
 ---
 
 # Nodejs笔记

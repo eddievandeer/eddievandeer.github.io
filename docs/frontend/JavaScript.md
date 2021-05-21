@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2020-08-09
+wordCount: 3.3k
+readTime: 9m
 ---
 
 # JavaScript笔记

@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2021-01-05
+wordCount: 2.0k
+readTime: 5m
 ---
 # 面试题
 

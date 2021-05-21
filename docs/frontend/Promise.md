@@ -1,5 +1,8 @@
 ---
 layout: ArticleDetail
+postTime: 2021-04-10
+wordCount: 2.5k
+readTime: 7m
 ---
 
 # 手写Promise
