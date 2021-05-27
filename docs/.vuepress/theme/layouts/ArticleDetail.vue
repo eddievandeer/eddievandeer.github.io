@@ -7,6 +7,7 @@
                         <Content />
                         <Valine></Valine>
                   </div>
+                  <blog-footer></blog-footer>
             </div>
             <pagination :style="{opacity:showPagination?0:1}" :pages="pages"></pagination>
       </div>
@@ -58,8 +59,10 @@
 
             .article-detail {
                   max-width: 740px;
-                  margin: 0 auto;
-                  padding: 2rem 2rem;
+                  margin: 1.5rem auto;
+                  padding: 1rem 3rem;
+                  background-color: #f8f8f8;
+                  box-shadow: 0 0 10px 1px #cfcfcf;
             }
       }
 
