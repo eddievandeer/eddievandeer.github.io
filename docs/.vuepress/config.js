@@ -30,9 +30,9 @@ module.exports = {
                   href: '/assets/icon/favicon.ico'
             }]
       ],
-      // markdown: {
-      //       lineNumbers: true
-      // },
+      markdown: {
+            lineNumbers: true
+      },
       // plugins: [
       //       '@vuepress/back-to-top',
       //       '@vuepress/nprogress'

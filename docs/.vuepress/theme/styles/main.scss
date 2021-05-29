@@ -194,3 +194,27 @@ blockquote {
             }
       }
 }
+
+.line-numbers-mode {
+      position: relative;
+
+      pre[class*="language-"] {
+            border-radius: 3px;
+            padding: 1em 1rem 1rem 4.2rem;
+      }
+
+      .line-numbers-wrapper {
+            min-width: 3.6rem;
+            color: #979797;
+            box-sizing: border-box;
+            padding: 1rem .6rem;
+            line-height: 19pt;
+            text-align: center;
+            border-radius: 3px 0 0 0;
+            border-right: 1px solid #0E0F12;
+            background-color: #2D2D2D;
+            position: absolute;
+            top: 0;
+            left: 0;
+      }
+}
