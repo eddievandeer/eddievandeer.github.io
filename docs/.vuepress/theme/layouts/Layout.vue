@@ -3,7 +3,6 @@
             <blog-header></blog-header>
             <blog-index></blog-index>
             <blog-home></blog-home>
-            <blog-footer></blog-footer>
       </div>
 </template>
 
@@ -50,5 +49,3 @@
             }
       }
 </script>
-
-<style src="prismjs/themes/prism-tomorrow.css"></style>
