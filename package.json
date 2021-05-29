@@ -6,7 +6,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "deploy": "bash deploy.sh"
+    "deploy": "bash deploy.sh",
+    "new": "node ./script/newMd.js"
   },
   "dependencies": {
     "@vuepress/theme-default": "^1.0.0-rc.1",
@@ -16,10 +17,12 @@
     "@vuepress/plugin-back-to-top": "^1.5.4",
     "@vuepress/plugin-nprogress": "^1.5.4",
     "@vuepress/plugin-search": "^1.5.4",
+    "chalk": "^4.1.0",
     "font-awesome": "^4.7.0",
+    "log-symbols": "^4.0.0",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.2",
-    "vuepress-plugin-container": "^2.1.5",
-    "valine": "^1.4.14"
+    "valine": "^1.4.14",
+    "vuepress-plugin-container": "^2.1.5"
   }
 }
