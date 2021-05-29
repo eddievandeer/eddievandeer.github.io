@@ -11,6 +11,7 @@
                   <drop-down></drop-down>
             </div>
             <about-me></about-me>
+            <blog-footer></blog-footer>
       </div>
 </template>
 
