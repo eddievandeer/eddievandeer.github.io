@@ -40,8 +40,6 @@
       }
 
       .down {
-            width: 60px;
-            height: 80px;
             font-size: 45px;
             animation: anima 1.5s cubic-bezier(0.6, 0.04, 0.52, 1.01) infinite;
 
