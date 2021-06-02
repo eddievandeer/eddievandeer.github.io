@@ -1,11 +1,12 @@
 ---
 layout: ArticleDetail
+title: 实习面经
 postTime: 2021-03-28
-wordCount: 3.4k
-readTime: 9
+categories: 面试
+tags:
+- 前端
+- 面试经历
 ---
-
-# 实习面经
 
 ## 春招
 

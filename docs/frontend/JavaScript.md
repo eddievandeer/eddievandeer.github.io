@@ -1,8 +1,13 @@
 ---
 layout: ArticleDetail
+title: JavaScript笔记
 postTime: 2020-08-09
-wordCount: 3.3k
-readTime: 9m
+categories: 
+- 前端笔记
+- JavaScript
+tags:
+- JavaScript
+- 笔记
 ---
 
 # JavaScript笔记

@@ -1,8 +1,13 @@
 ---
 layout: ArticleDetail
+title: 浏览器相关原理
 postTime: 2020-08-09
-wordCount: 621
-readTime: 2m
+categories: 
+- 前端笔记
+- 浏览器
+tags: 
+- 构建DOM
+- 浏览器渲染
 ---
 
 # 浏览器笔记

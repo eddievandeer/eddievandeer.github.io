@@ -1,8 +1,12 @@
 ---
 layout: ArticleDetail
+title: Vue源码学习笔记
 postTime: 2020-10-20
-wordCount: 1.7k
-readTime: 5m
+categories: Vue源码学习笔记
+tags: 
+- Vue
+- 源码
+- 深入学习
 ---
 
 # Vue源码笔记

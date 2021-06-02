@@ -1,8 +1,11 @@
 ---
 layout: ArticleDetail
+title: 手写符合Promise A+规范的Promise
 postTime: 2021-04-10
-wordCount: 2.5k
-readTime: 7m
+categories: 前端教程
+tags: 
+- Promise A+
+- 异步
 ---
 
 # 手写Promise

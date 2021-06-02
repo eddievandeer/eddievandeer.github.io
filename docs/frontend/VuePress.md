@@ -1,8 +1,12 @@
 ---
 layout: ArticleDetail
+title: 使用VuePress开发并部署静态博客网站
 postTime: 2020-08-13
-wordCount: 2.4k
-readTime: 6m
+categories: 前端教程
+tags:
+- Vue
+- Vuepress
+- 静态博客
 ---
 
 # VuePress笔记

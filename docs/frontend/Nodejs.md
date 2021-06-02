@@ -1,8 +1,12 @@
 ---
 layout: ArticleDetail
-postTime: 2020-11-22
-wordCount: 1.2k
-readTime: 3m
+title: Nodejs笔记
+postTime: 2020-9-22
+categories: 后端笔记
+tags:
+- Nodejs
+- 后端
+- JavaScript
 ---
 
 # Nodejs笔记

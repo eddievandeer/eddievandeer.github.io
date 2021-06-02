@@ -1,8 +1,13 @@
 ---
 layout: ArticleDetail
+title: webpack笔记
 postTime: 2020-08-13
-wordCount: 764
-readTime: 2m
+categories: 
+- 前端笔记
+- JavaScript
+tags:
+- Webpack
+- 工具
 ---
 
 # webpack笔记

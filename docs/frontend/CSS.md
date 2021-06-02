@@ -1,8 +1,14 @@
 ---
 layout: ArticleDetail
+title: CSS笔记
 postTime: 2020-08-09
-wordCount: 1.5k
-readTime: 4m
+categories:
+- 前端笔记
+- CSS
+tags:
+- 前端
+- CSS属性
+- 布局
 ---
 
 # CSS笔记

@@ -1,8 +1,13 @@
 ---
 layout: ArticleDetail
+title: HTML笔记
 postTime: 2020-08-09
-wordCount: 370
-readTime: 1m
+categories: 
+- 前端笔记
+- HTML
+tags:
+- HTML
+- 笔记
 ---
 
 # HTML笔记

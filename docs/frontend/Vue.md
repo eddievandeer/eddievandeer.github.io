@@ -1,8 +1,14 @@
 ---
 layout: ArticleDetail
+title: Vue入门学习笔记
 postTime: 2020-09-25
-wordCount: 4.4k
-readTime: 12m
+categories: 
+- 前端笔记
+- Vue
+tags: 
+- 前端
+- Vue
+- 笔记
 ---
 
 # Vue笔记

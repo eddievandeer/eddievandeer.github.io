@@ -1,8 +1,14 @@
 ---
 layout: ArticleDetail
+title: DOM笔记
 postTime: 2020-10-02
-wordCount: 1.5k
-readTime: 4m
+categories: 
+- 前端笔记
+- JavaScript
+tags:
+- 前端
+- DOM
+- JavaScript
 ---
 
 # DOM笔记

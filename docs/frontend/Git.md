@@ -1,8 +1,11 @@
 ---
 layout: ArticleDetail
+title: Git的简单使用
 postTime: 2020-08-09
-wordCount: 1.3k
-readTime: 4m
+categories: 常用工具
+tags:
+- git
+- 工具
 ---
 
 # Git笔记

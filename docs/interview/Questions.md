@@ -1,11 +1,12 @@
 ---
 layout: ArticleDetail
+title: 做过的一些面试题
 postTime: 2021-01-05
-wordCount: 2.0k
-readTime: 5m
+categories: 面试
+tags:
+- 前端
+- 面试题
 ---
-# 面试题
-
 ## 第一题
 
 ### Object.defineProperty()

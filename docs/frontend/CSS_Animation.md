@@ -1,8 +1,14 @@
 ---
 layout: ArticleDetail
+title: CSS animations 和 transitions的性能问题
 postTime: 2021-04-07
-wordCount: 1.3k
-readTime: 4m
+categories: 
+- 前端笔记
+- CSS
+tags:
+- CSS动画
+- 浏览器原理
+- 优化
 ---
 
 # CSS animations 和 transitions的性能问题
