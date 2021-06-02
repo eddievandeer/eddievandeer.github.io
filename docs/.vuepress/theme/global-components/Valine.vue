@@ -7,7 +7,7 @@
             </span>
             <div class="last-updated">
                 <span class="prefix">上次更新：</span>
-                <span class="time">{{lastModifiedTime}}</span>
+                <span class="time">{{$page.lastUpdated}}</span>
             </div>
         </div>
         <div id="valine-vuepress-comment"></div>
@@ -20,7 +20,8 @@
         data() {
             return {
                 url: '',
-                lastModifiedTime: ''
+                lastModifiedTime: '',
+                isRouterAlive: true
             }
         },
         mounted() {

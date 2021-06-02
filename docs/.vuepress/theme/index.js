@@ -11,6 +11,7 @@ module.exports = {
                   searchMaxSuggestions: 10
             }],
             '@vuepress/back-to-top',
-            '@vuepress/nprogress'
+            '@vuepress/nprogress',
+            '@vuepress/last-updated'
       ]
 }
