@@ -11,7 +11,11 @@ tags:
 - JavaScript
 ---
 
-# DOM笔记
+::: slot abstract
+
+DOM方面的笔记，记录了一些常用的功能和一些使用DOM相关知识制作的有意思的小玩意儿
+
+:::
 
 ## DOM：toggle()
 

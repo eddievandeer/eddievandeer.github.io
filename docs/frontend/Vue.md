@@ -11,7 +11,21 @@ tags:
 - 笔记
 ---
 
-# Vue笔记
+::: slot abstract
+
+<div style="width: 100%;height: 200px;display: flex;justify-content: center">
+  <img style="width: auto;height: 100%" src="http://upyun.cavalheiro.cn/images/logo.png"/>  
+</div>
+
+[Vue2](https://cn.vuejs.org/) 入门笔记，适合刚接触Vue的新手阅读（部分过于基础的内容这里就不做记录了）
+
+主要内容包括：
+
+- Vue基础
+- Vue工程化
+- Vuex的使用
+
+:::
 
 ## 1、Vue基础
 

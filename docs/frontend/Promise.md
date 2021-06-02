@@ -8,7 +8,15 @@ tags:
 - 异步
 ---
 
-# 手写Promise
+::: slot abstract
+
+![image-20210521151359134.png](https://i.loli.net/2021/05/21/wyzrMWnK2tsUTbC.png)
+
+最近在面试中被问到了一些Promise相关的问题，感觉自己回答的不是很好，于是决定，参照 [Promise A+ 规范](https://promisesaplus.com/) 手写一下Promise加深对Promise的理解。
+
+参考了掘金上的 [一篇文章](https://juejin.cn/post/6945319439772434469) ，毕竟还是小菜鸡一枚，让我直接照着Promise A+直接上手敲代码不太现实~~
+
+:::
 
 ## 前置知识点
 

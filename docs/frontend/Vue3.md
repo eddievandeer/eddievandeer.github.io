@@ -11,7 +11,15 @@ tags:
 - 笔记
 ---
 
-# Vue3笔记
+::: slot abstract
+
+![vue3](http://upyun.cavalheiro.cn/images/vue3.jpg)
+
+[Vue.js 3.0](https://v3.vuejs.org/) 于2020年9月正式发布，这个框架的新的主要版本提供了改进的性能、更小的捆绑大小、更好的 TypeScript 集成、用于处理大规模用例的新 API，以及为框架未来的长期迭代奠定了坚实的基础
+
+> 本篇文章为Vue3的学习笔记，记录一些在Vue2中没有的新东西，以及Vue3中对Vue2原有的部分内容做出的更改
+
+:::
 
 ## Composition API设计模式
 

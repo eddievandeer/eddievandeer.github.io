@@ -9,7 +9,17 @@ tags:
 - 深入学习
 ---
 
-# Vue源码笔记
+::: slot abstract
+
+![image.png](https://i.loli.net/2020/10/25/W5HPJ4gNG7OKb2y.png)
+
+Vue源码中的数据劫持部分，属于**面试常考内容**。
+
+涉及到 `Object.defineProperty` 和 ES6中的 `Proxy` ，两者分别为 [Vue2](https://cn.vuejs.org/) 和 [Vue3](https://v3.vuejs.org/) 在实现数据劫持时所使用的关键技术
+
+> 文中只记录了 `Object.defineProperty` 的实现，后续会更新 `Proxy` 的实现
+
+:::
 
 ## 数据劫持
 

@@ -2,11 +2,19 @@
 layout: ArticleDetail
 title: HTTP相关内容笔记
 postTime: 2020-09-08
-wordCount: 1.4k
-readTime: 4m
+categories: 计算机网络
+tags:
+- HTTP
+- Internet
 ---
 
-# 互联网
+::: slot abstract
+
+记录HTTP的基础知识，如请求类型、状态码等
+
+> 也会放一些Web前端开发面试时常问的面试题和相应的解答
+
+:::
 
 ## HTTP/HTTPS
 

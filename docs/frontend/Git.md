@@ -8,7 +8,13 @@ tags:
 - 工具
 ---
 
-# Git笔记
+::: slot abstract
+
+[Git](https://git-scm.com/) 的基础使用，分支这块也只涉及一小部分基础知识
+
+> 配合Github演示了对远程仓库的管理
+
+:::
 
 ## 1、本地仓库
 
