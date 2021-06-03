@@ -72,15 +72,6 @@
                   padding: 0;
             }
 
-            blockquote {
-                  color: #848484;
-                  font-size: 24px;
-                  font-weight: 200;
-                  letter-spacing: 3px;
-                  padding: 0;
-                  margin-top: 1px;
-            }
-
             button {
                   width: 220px;
                   height: 65px;
