@@ -3,10 +3,12 @@
         <div class="pagination-pre" v-show="prePath.length > 0">
             <router-link :to="prePath">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                <span>{{preTitle}}</span>
             </router-link>
         </div>
         <div class="pagination-next" v-show="nextPath.length > 0">
             <router-link :to="nextPath">
+                <span>{{nextTitle}}</span>
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </router-link>
         </div>
@@ -18,11 +20,12 @@
 
     export default {
         name: 'Pagination',
-        props: ['pages'],
         data() {
             return {
                 prePath: '',
-                nextPath: ''
+                nextPath: '',
+                preTitle: '',
+                nextTitle: ''
             }
         },
         mounted() {
@@ -31,14 +34,12 @@
         watch: {
             $route(to, from) {
                 this.initPage()
-                console.log(1);
             }
         },
         methods: {
             initPage() {
-                const site = this.$site
-                const nowPages = parsePage(site.pages, this.$page.path)
-                const nowPageKey = this.$page.key
+                const nowPages = parsePage(this.$site.pages),
+                    nowPageKey = this.$page.key
 
                 for (let i = 0; i < nowPages.length; i++) {
                     const page = nowPages[i]
@@ -47,6 +48,8 @@
                     if (page.key == nowPageKey) {
                         this.prePath = prePage ? prePage.path : ''
                         this.nextPath = nextPage ? nextPage.path : ''
+                        this.preTitle = prePage ? prePage.title : ''
+                        this.nextTitle = nextPage ? nextPage.title : ''
                     }
                 }
             }
@@ -58,46 +61,43 @@
     @import '../../styles/values.scss';
 
     .pagination-wrapper {
-        z-index: 10;
         width: 100%;
-        height: calc(100vh - 60px);
+        min-height: 20px;
+        margin-top: 3rem;
         transition: opacity .2s ease-in-out;
-        position: fixed;
-        bottom: 0px;
-        right: 0px;
         pointer-events: none;
 
         .pagination-pre,
         .pagination-next {
-            height: 15%;
-            width: 40px;
-            background-color: rgba(0, 0, 0, .2);
+            // height: 15%;
+            max-width: 50%;
+            // background-color: rgba(0, 0, 0, .2);
             cursor: pointer;
             pointer-events: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 50%;
+            @extend .flex;
 
             a {
-                color: $primary-background;
-                font-size: 30px;
+                color: $word-color;
+                font-size: 14px;
+                text-decoration: none;
+
+                span {
+                    max-width: 90%;
+                    line-height: 1.4;
+                }
+
+                &:hover {
+                    color: $word-color-blue;
+                }
             }
         }
 
         .pagination-pre {
-            left: 0;
+            float: left;
         }
 
         .pagination-next {
-            right: 0;
-        }
-    }
-
-    @media screen and (min-width: 1024px) {
-        .pagination-wrapper {
-            display: none;
+            float: right;
         }
     }
 </style>

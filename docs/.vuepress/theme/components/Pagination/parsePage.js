@@ -1,7 +1,7 @@
-function parsePage(pages, now) {
+function parsePage(pages) {
     const result = []
     pages.forEach(page => {
-        if (page.path.split('/')[1] == now.split('/')[1]) {
+        if (page.path.endsWith('html')) {
             result.push(page)
         }
     });
