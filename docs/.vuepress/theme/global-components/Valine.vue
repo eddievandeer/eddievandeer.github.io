@@ -15,26 +15,43 @@
 </template>
 
 <script>
+    import Valine from 'valine'
+    import '../styles/valineStyle.scss'
+
     export default {
         name: 'Valine',
         data() {
             return {
+                valine: new Valine(),
                 url: '',
                 lastModifiedTime: '',
                 isRouterAlive: true
             }
         },
         mounted() {
-            let urls = window.location.pathname.split("/");
-            this.url = '/' + urls[1] + '/' + urls[2];
-            this.lastModifiedTime = document.lastModified;
-            console.log(this.url);
-            import('valine').then(Valine => {
-                new Valine.default({
+            this.lastModifiedTime = this.$page.lastUpdated
+
+            this.initValine()
+        },
+        watch: {
+            $route(to, from) {
+                if (to.path !== from.path) {
+                    this.lastModifiedTime = this.$page.lastUpdated
+                    this.initValine()
+                }
+            }
+        },
+        methods: {
+            initValine() {
+                let urls = window.location.pathname.split("/")
+                this.url = '/' + urls[1] + '/' + urls[2]
+
+                this.valine.init({
                     el: '#valine-vuepress-comment',
                     appId: "eytWDTcVXxD6jB2TPPIFVljq-gzGzoHsz",
                     appKey: 'sJRhu6ftXLC0eNR4vsjo3Euy',
                     placeholder: '在此处输入评论：',
+                    path: this.url,
                     visitor: true,
                     // 设置Bilibili表情包地址
                     emojiCDN: '//i0.hdslb.com/bfs/emote/',
@@ -93,15 +110,14 @@
                         "热词系列-你可真星": "54c8ddff400abfe388060cabfbb579280fdea1be.png@112w_112h.webp",
                     }
                 })
-            })
-            // import('../styles/valineStyle.scss')
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
     .valine-body {
-        margin-top: 80px;
+        margin-top: 3rem;
 
         .footer {
             display: flex;
