@@ -110,7 +110,7 @@
             width: 100%;
             height: 100%;
             // background-image: url(https://i.loli.net/2020/09/11/ElcNrtJVkPWamOo.jpg);
-            background-image: url("../../public/assets/img/background.jpg");
+            background-image: url("http://upyun.cavalheiro.cn/images/background.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center top;
