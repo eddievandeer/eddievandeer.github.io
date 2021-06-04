@@ -1,12 +1,12 @@
 <template>
     <div class="list-container" :class="{hide: !sidebar}">
-        <div class="list-item" v-for="index in titles.length" :key="index" :class="{active: index-1==activeIndex}">
-            <a v-if="titles[index - 1].url" :target="titles[index - 1].level == 3 ? '__blank' : ''"
-                :href="titles[index - 1].url" :class="setLevel(titles[index - 1].level)">
-                <p>{{ titles[index - 1].title }}</p>
+        <div class="list-item" v-for="(title, index) in titles" :key="index" :class="{active: index==activeIndex}">
+            <a v-if="title.url" :target="title.level == 3 ? '__blank' : ''" :href="title.url"
+                :class="setLevel(title.level)">
+                <p>{{ title.title }}</p>
             </a>
-            <a v-else :href="'#' + titles[index - 1].slug" :class="setLevel(titles[index - 1].level)">
-                <p>{{ titles[index - 1].title }}</p>
+            <a v-else :href="'#' + title.slug" :class="setLevel(title.level)">
+                <p>{{ title.title }}</p>
             </a>
         </div>
     </div>
@@ -67,6 +67,17 @@
                 // this.onScroll()
                 window.addEventListener("scroll", this.onScroll);
             }
+        },
+        watch: {
+            $route(to, from) {
+                if (to.path !== from.path) {
+                    if (this.$page.headers) {
+                        this.activeIndex = 0
+                        this.titles = this.$page.headers
+                        // this.titles.push(...this.$page.headers);
+                    }
+                }
+            }
         }
     };
 </script>
@@ -80,7 +91,7 @@
         height: calc(100vh - 60px);
         font-size: 16px;
         margin: 0;
-        padding: 0 15px;
+        padding: 20px 15px;
         box-sizing: border-box;
         border-right: 1px solid #eaecef;
         background-color: $primary-background;
@@ -92,8 +103,8 @@
         left: 0px;
 
         &::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 0px;
+            height: 0px;
         }
 
         &::-webkit-scrollbar-track {
@@ -106,9 +117,10 @@
 
         .list-item {
             width: 100%;
-            min-height: 50px;
-            margin: 10px 0;
-            border-bottom: 1px solid #d1d1d1;
+            min-height: 20px;
+            // margin: 10px 0;
+            // border-bottom: 1px solid #d1d1d1;
+            border-left: 4px solid transparent;
             background-color: $primary-background;
             transition-property: box-shadow, background-color;
             transition-duration: 0.2s, 0.2s;
@@ -128,7 +140,8 @@
                     font-weight: 600;
 
                     p {
-                        padding-left: 20px;
+                        padding: 5px 0 5px 20px;
+                        margin: 0;
                     }
                 }
 
@@ -136,22 +149,26 @@
                     font-size: 14px;
 
                     p {
-                        padding-left: 40px;
+                        padding: 5px 0 5px 40px;
+                        margin: 0;
                     }
                 }
             }
 
             &:hover,
             &.active {
-                background-color: #f0f0f0;
-                border-left: 4px solid #2a80b9;
-                border-bottom: 1px solid transparent;
-                border-radius: 5px;
-                box-shadow: $primary-shadow;
+                // background-color: var(--color-bg-hover);
+                // border-bottom: 1px solid transparent;
+                // border-radius: 5px;
+                // box-shadow: $primary-shadow;
 
                 a {
                     color: #2a80b9;
                 }
+            }
+
+            &.active {
+                border-left-color: #2a80b9;
             }
         }
 
