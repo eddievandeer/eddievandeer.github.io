@@ -5,12 +5,18 @@ module.exports = [
     {
         text: '前端笔记', link: '/frontend/'
     },
+    // {
+    //     text: '画册', link: '/album/'
+    // },
     {
-        text: '画册', link: '/album/'
+        text: '分类', link: '/categories/'
     },
     {
-        text: '面试', link: '/interview'
+        text: '标签', link: '/tags/'
     },
+    // {
+    //     text: '面试', link: '/interview'
+    // },
     {
         text: '工具箱',
         items: [
@@ -33,5 +39,8 @@ module.exports = [
                 text: '取色板', link: 'https://flatuicolors.com/', target: '_blank'
             }
         ]
+    },
+    {
+        text: '关于我', link: '/about'
     }
 ]
