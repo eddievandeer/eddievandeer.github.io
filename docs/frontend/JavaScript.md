@@ -10,8 +10,6 @@ tags:
 - 笔记
 ---
 
-# JavaScript笔记
-
 ## JS
 
 ### JS：AJAX原理及各种封装
@@ -135,7 +133,7 @@ const demo = (function(){
 
 ### JS：声明式渲染的简单实现
 
-实现{{ xxx }}将数据渲染进DOM，原理：获取DOM元素的InnerHTML，使用**正则**识别{{}}并使用 `replace()` 函数进行替换
+实现使用两个大括号包裹值的方式将数据渲染进DOM，原理：获取DOM元素的InnerHTML，使用**正则**识别{{}}并使用 `replace()` 函数进行替换
 
 ~~~js
 // elem为作为模板的DOM元素
