@@ -1,6 +1,6 @@
 <template>
       <div class="drop-container">
-            <div class="down">
+            <div class="down" @click="dropDown">
                   <i class="fa fa-angle-down" aria-hidden="true"></i>
             </div>
       </div>
@@ -9,18 +9,13 @@
 <script>
       export default {
             name: 'dropDown',
-            mounted() {
-                  let down = document.querySelector('.down')
-                  down.addEventListener('click', () => {
-                        let header = document.querySelector('.blog-header')
-                        header.classList.remove('hide')
-                        this.dropDown()
-                  })
-            },
             methods: {
                   dropDown() {
-                        const about = document.querySelector('#about')
-                        window.scrollTo(0, about.scrollHeight)
+                        let header = document.querySelector('.blog-header')
+                        const main = document.querySelector('.blog-home')
+
+                        header.classList.remove('hide')
+                        window.scrollTo(0, main.clientHeight)
                   }
             }
       }
@@ -42,10 +37,10 @@
       .down {
             font-size: 45px;
             animation: anima 1.5s cubic-bezier(0.6, 0.04, 0.52, 1.01) infinite;
+            cursor: pointer;
 
             i {
                   color: $primary-background;
-                  cursor: pointer;
             }
       }
 
