@@ -7,7 +7,7 @@
             </div>
             <div class="home-link">
                   <a href="/">
-                        <h2 class="title">首页</h2>
+                        <h1 class="title">首页</h1>
                   </a>
             </div>
       </div>
