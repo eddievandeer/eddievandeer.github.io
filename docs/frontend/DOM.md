@@ -410,7 +410,6 @@ class Danmu {
     }
 
     function handleDanmuBtnClick() {
-        console.log(1);
         //暂停状态不能发送弹幕
         if (videoDanmu.paused) return;
 

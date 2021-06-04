@@ -72,7 +72,17 @@ docker.io   docker.io/mysql/mysql-server                Optimized MySQL Server D
 
 ~~~shell
 # 通过镜像的id进行删除
-[root@xxx /]# dicker rmi -f IMAGE_ID
+[root@xxx /]# docker rmi -f IMAGE_ID
+~~~
+
+**docker build：** 创建镜像
+
+~~~shell
+# 根据Dockerfile创建镜像
+[root@xxx /]# docker build -t ImageName:TagName path
+# ImageName：镜像名
+# TagName：镜像的tag名
+# path：Dockerfile所在的路径
 ~~~
 
 
