@@ -20,19 +20,19 @@ $card-shadow: 0 0 10px 1px #cfcfcf;
 
 $card-shadow-hover: 0 0 15px 1px #cfcfcf;
 
-$button-shadow: 15px 15px 18px calc(--color-shadow-right),
--15px -15px 18px calc(--color-shadow-left);
+$button-shadow: 15px 15px 18px var(--color-shadow-right),
+-15px -15px 18px var(--color-shadow-left);
 
-$button-shadow-hover: 6px 6px 12px calc(--color-shadow-right),
--6px -6px 12px calc(--color-shadow-left);
+$button-shadow-hover: 6px 6px 12px var(--color-shadow-right),
+-6px -6px 12px var(--color-shadow-left);
 
-$button-shadow-active: 0px 0px 0px calc(--color-shadow-right),
-0px 0px 0px calc(--color-shadow-left),
-inset 10px 10px 18px calc(--color-shadow-right),
-inset -15px -15px 18px calc(--color-shadow-left);
+$button-shadow-active: 0px 0px 0px var(--color-shadow-right),
+0px 0px 0px var(--color-shadow-left),
+inset 10px 10px 18px var(--color-shadow-right),
+inset -10px -10px 18px var(--color-shadow-left);
 
 $word-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2),
--5px -5px 5px calc(--color-shadow-left);
+-5px -5px 5px var(--color-shadow-left);
 
 $word-color:#2c3e50;
 
