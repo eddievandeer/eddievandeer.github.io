@@ -1,13 +1,15 @@
 <template>
-    <div class="theme-container">
-        <blog-header></blog-header>
-        <blog-index></blog-index>
-        <div class="about">
-            <Content />
+    <client-only>
+        <div class="theme-container">
+            <blog-header></blog-header>
+            <blog-index></blog-index>
+            <div class="about">
+                <Content />
+            </div>
+            <blog-articles :filted="filted" :pageNumber="pageNumber"></blog-articles>
+            <blog-footer></blog-footer>
         </div>
-        <blog-articles :filted="filted" :pageNumber="pageNumber"></blog-articles>
-        <blog-footer></blog-footer>
-    </div>
+    </client-only>
 </template>
 
 <script>

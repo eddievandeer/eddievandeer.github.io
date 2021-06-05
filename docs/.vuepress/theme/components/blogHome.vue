@@ -1,11 +1,13 @@
 <template>
-    <div class="home-page">
-        <blog-header></blog-header>
-        <div class="blog-articles">
-            <blog-articles :pageNumber="pageNumber" :filted="pages" path="page"></blog-articles>
+    <client-only>
+        <div class="home-page">
+            <blog-header></blog-header>
+            <div class="blog-articles">
+                <blog-articles :pageNumber="pageNumber" :filted="pages" path="page"></blog-articles>
+            </div>
+            <blog-footer></blog-footer>
         </div>
-        <blog-footer></blog-footer>
-    </div>
+    </client-only>
 </template>
 
 <script>
@@ -99,7 +101,8 @@
                     event.stopPropagation()
                 }
 
-                if ((window.location.pathname != '/' || this.slidesLock) && window.location.pathname.split('/')[1] != 'page') return
+                if ((window.location.pathname != '/' || this.slidesLock) && window.location.pathname.split('/')[1] !=
+                    'page') return
 
                 this.slidesLock = true
 
