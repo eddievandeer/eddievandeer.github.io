@@ -9,9 +9,12 @@
                     </a>
                 </span>
                 <span v-else v-for="(category, index) in page.frontmatter.categories" :key="index">
-                    <a :href="'/categories/' + category">
-                        <i class="fa fa-folder-o" aria-hidden="true" v-if="index == 0"></i>
-                        <i class="fa fa-angle-double-right" aria-hidden="true" v-else></i>
+                    <a :href="'/categories/' + category" v-if="index == 0">
+                        <i class="fa fa-folder-o" aria-hidden="true"></i>
+                        {{category}}
+                    </a>
+                    <a :href="'/categories/' + page.frontmatter.categories[0] + '/' + category" v-else>
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                         {{category}}
                     </a>
                 </span>
