@@ -59,8 +59,6 @@
                 const currentPage = Number(this.currentPage)
                 const pageCount = Number(this.maxPageNumber) + 1
 
-                console.log(pageCount, pagerCount);
-
                 let showPrevMore = false
                 let showNextMore = false
 

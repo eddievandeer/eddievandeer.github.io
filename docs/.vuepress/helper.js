@@ -19,7 +19,6 @@ export function countCategories(page, siteCategories) {
         }
     } else {
         key = '默认分类'
-        console.log(page);
     }
 
     if (siteCategories.has(key)) {

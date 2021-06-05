@@ -56,7 +56,6 @@
                     this.main.addEventListener(
                         "DOMMouseScroll",
                         e => {
-                            console.log(e)
                             this.onMouseWheel(e, e.detail)
                         },
                         false
@@ -64,7 +63,6 @@
                     this.main.addEventListener(
                         "MozMousePixelScroll",
                         e => {
-                            console.log(e)
                             this.onMouseWheel(e, e.detail)
                         },
                         false

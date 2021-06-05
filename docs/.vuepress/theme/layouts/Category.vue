@@ -44,8 +44,6 @@
                     this.$categories.get(this.category).children.get(this.child).pages :
                     this.$categories.get(this.category).pages
 
-                console.log(filted);
-
                 this.total = filted.length
 
                 this.pages.clear()
@@ -60,14 +58,11 @@
                         this.pages.set(postYear, [filted[i]])
                     }
                 }
-
-                console.log(this.pages);
             },
             handlePageChange({
                 pageNumber
             }) {
                 this.setPage(pageNumber)
-                console.log(this.category);
                 this.$router.push({
                     path: `/categories/${this.category}${this.child ? '/' + this.child : ''}/page/${pageNumber}`
                 })

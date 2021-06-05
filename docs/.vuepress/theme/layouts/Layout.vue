@@ -89,7 +89,6 @@
                 header.classList.add('hide')
             })
             main.addEventListener('touchmove', this.mobileScroll, false)
-            console.log(this.$categories);
         }
     }
 </script>
