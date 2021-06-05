@@ -15,14 +15,13 @@
 </template>
 
 <script>
-    import Valine from 'valine'
     import '../styles/valineStyle.scss'
 
     export default {
         name: 'Valine',
         data() {
             return {
-                valine: new Valine(),
+                valine: null,
                 url: '',
                 lastModifiedTime: '',
                 isRouterAlive: true
@@ -30,8 +29,11 @@
         },
         mounted() {
             this.lastModifiedTime = this.$page.lastUpdated
+            import('valine').then(Valine => {
+                this.valine = new Valine.default()
 
-            this.initValine()
+                this.initValine()
+            })
         },
         watch: {
             $route(to, from) {
