@@ -89,4 +89,15 @@
             }
         }
     }
+
+    @media screen and (max-width: 768px) {
+        .blog-tags {
+            padding: 1rem 1rem 2rem;
+
+            .tag-list {
+                width: 100%;
+                padding: 0;
+            }
+        }
+    }
 </style>
