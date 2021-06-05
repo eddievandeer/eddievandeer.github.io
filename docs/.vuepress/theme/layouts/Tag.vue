@@ -30,7 +30,7 @@
         data() {
             return {
                 pages: new Map(),
-                pageSize: 3,
+                pageSize: 6,
                 total: 0
             }
         },
