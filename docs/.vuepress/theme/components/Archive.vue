@@ -110,6 +110,7 @@
             }
 
             a {
+                flex: 1;
                 color: $word-color-blue;
                 font-size: 17px;
                 padding-left: 1.2rem;
