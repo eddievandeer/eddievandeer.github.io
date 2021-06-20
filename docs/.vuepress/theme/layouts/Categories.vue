@@ -1,7 +1,6 @@
 <template>
     <div>
         <blog-header></blog-header>
-        <blog-index></blog-index>
         <div class="categories-container">
             <h2>分类</h2>
             <p>共计 {{total}} 个分类</p>
@@ -96,6 +95,16 @@
 
             .category-list-child {
                 margin-left: 2.8rem;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .categories-container {
+            padding: 1rem 1rem 2rem;
+
+            .category-list {
+                padding: 0;
             }
         }
     }
