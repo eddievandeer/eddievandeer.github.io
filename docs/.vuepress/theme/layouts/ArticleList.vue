@@ -2,7 +2,6 @@
     <client-only>
         <div class="theme-container">
             <blog-header></blog-header>
-            <blog-index></blog-index>
             <div class="about">
                 <Content />
             </div>

@@ -1,7 +1,6 @@
 <template>
     <div class="tags-container">
         <blog-header></blog-header>
-        <blog-index></blog-index>
         <div class="blog-tags">
             <h2>标签</h2>
             <p>共计 {{total}} 个标签</p>

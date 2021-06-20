@@ -1,11 +1,13 @@
 <template>
       <div class="blog-header">
             <tool-bar></tool-bar>
+            <blog-index></blog-index>
       </div>
 </template>
 
 <script>
       import toolBar from '../components/toolBar'
+      import blogIndex from '../components/blogIndex'
       import {
             visibilityChange
       } from '../util/utils'
@@ -27,7 +29,8 @@
                   }
             },
             components: {
-                  toolBar
+                  toolBar,
+                  blogIndex
             }
       }
 </script>

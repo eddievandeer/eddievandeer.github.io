@@ -1,6 +1,6 @@
 <template>
     <div class="theme-container">
-        <blog-index></blog-index>
+        <!-- <blog-index></blog-index> -->
         <div class="blog-home">
             <div class="home-content">
                 <!-- <div class="blog-icon"></div> -->
@@ -49,12 +49,10 @@
 <script>
     import blogHome from '@theme/components/blogHome'
     import dropDown from '@theme/components/dropDown'
-    import blogIndex from '../components/blogIndex'
 
     export default {
         components: {
             blogHome,
-            blogIndex,
             dropDown
         },
         data() {
