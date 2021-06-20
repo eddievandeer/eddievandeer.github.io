@@ -1,17 +1,19 @@
 <template>
-    <div class="category-container">
-        <blog-header></blog-header>
-        <div class="blog-category">
-            <div class="category-tile">
-                <h1>{{child ? child : category}}</h1>
+    <client-only>
+        <div class="category-container">
+            <blog-header></blog-header>
+            <div class="blog-category">
+                <div class="category-tile">
+                    <h1><i class="fa fa-folder-o" aria-hidden="true"></i>{{child ? child : category}}</h1>
+                </div>
+                <Archive :pages="pages"></Archive>
             </div>
-            <Archive :pages="pages"></Archive>
+            <page-controller :pageSize="pageSize" :total="total" :current-page="parseInt(pageNumber)"
+                @page-change="handlePageChange($event)">
+            </page-controller>
+            <blog-footer></blog-footer>
         </div>
-        <page-controller :pageSize="pageSize" :total="total" :current-page="parseInt(pageNumber)"
-            @page-change="handlePageChange($event)">
-        </page-controller>
-        <blog-footer></blog-footer>
-    </div>
+    </client-only>
 </template>
 
 <script>
@@ -93,12 +95,24 @@
         .blog-category {
             min-width: 30%;
             flex: 1;
+            padding: 0 2rem;
+            box-sizing: border-box;
             @extend .flex-column;
             justify-content: flex-start;
 
             .category-tile {
                 width: fit-content;
+
+                i {
+                    margin-right: .6rem;
+                }
             }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .blog-category {
+            width: 100%;
         }
     }
 </style>

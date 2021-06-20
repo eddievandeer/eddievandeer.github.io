@@ -1,17 +1,19 @@
 <template>
-    <div class="tag-container">
-        <blog-header></blog-header>
-        <div class="blog-tag">
-            <div class="tag-tile">
-                <h1>{{tag}}</h1>
+    <client-only>
+        <div class="tag-container">
+            <blog-header></blog-header>
+            <div class="blog-tag">
+                <div class="tag-tile">
+                    <h1><i class="fa fa-tag" aria-hidden="true"></i>{{tag}}</h1>
+                </div>
+                <Archive :pages="pages"></Archive>
+                <page-controller :pageSize="pageSize" :total="total" :current-page="parseInt(pageNumber)"
+                    @page-change="handlePageChange($event)">
+                </page-controller>
             </div>
-            <Archive :pages="pages"></Archive>
-            <page-controller :pageSize="pageSize" :total="total" :current-page="parseInt(pageNumber)"
-                @page-change="handlePageChange($event)">
-            </page-controller>
+            <blog-footer></blog-footer>
         </div>
-        <blog-footer></blog-footer>
-    </div>
+    </client-only>
 </template>
 
 <script>
@@ -95,6 +97,10 @@
 
             .tag-tile {
                 width: fit-content;
+
+                i {
+                    margin-right: .6rem;
+                }
             }
         }
     }
