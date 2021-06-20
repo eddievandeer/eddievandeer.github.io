@@ -252,3 +252,21 @@ server {
 }
 ~~~
 
+
+
+> 若你在项目中使用了Vue-router的同时，Vue-router开的是history模式，会出现访问部分路由出现404的现象，需要再进行如下配置：
+
+~~~
+server {
+    listen          80;
+    server_name     cavalheiro.cn;
+
+    location / {
+        root    /usr/share/nginx/html/blog;
+        index   index.html index.htm;
+        # 关键代码，添加后Nginx支持history模式
+        try_files $uri $uri/ /index.html;
+    }
+}
+~~~
+
