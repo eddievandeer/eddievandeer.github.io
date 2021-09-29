@@ -1,7 +1,7 @@
 ---
 layout: ArticleDetail
 title: 详解JavaScript中的继承
-postTime: 2020-08-09
+postTime: 2021-08-09
 categories: 
 - 前端笔记
 - JavaScript
@@ -49,7 +49,7 @@ JavaScript的对象在访问其属性时，不仅会在对象自身上找，还�
 
 结合上述两种特性，我们可以很容易的想到原型链继承是如何实现的：
 
-**将子类的原型设置为父类的一个实例，这样子类的实例就可以通过构建出来的原型链来对父类原型上的属性进行访问，**使用代码描述如下：
+**将子类的原型设置为父类的一个实例，这样子类的实例就可以通过构建出来的原型链来对父类原型上的属性进行访问，** 使用代码描述如下：
 
 ~~~js
 function SuperType() {
@@ -79,7 +79,7 @@ instance.getSuperValue()	// SuperValue is: 5
 instance.getSubValue()		// SubValue is: 10
 ~~~
 
-上述代码中，创建了一个父类 SuperType ，和一个子类 SubType ，并将 SubType 的原型设置为 SuperType 的实例，同时将 SubType 的构造函数设置为 SubType 的构造函数。这两个类和最后创建的实例之间的关系图如下：
+上述代码中，创建了一个父类 SuperType ，和一个子类 SubType ，并将 SubType 的原型设置为 SuperType 的实例，同时将被覆盖的 SubType 原型上的构造函数重新设置为 SubType 函数。这两个类和最后创建的实例之间的关系图如下：
 
 ![image-20210620164940680](http://upyun.cavalheiro.cn/images/image-20210620164940680.png)
 
@@ -248,8 +248,8 @@ yetAnotherPerson.colors.push('white')
 console.log(person.colors) // ["red", "green", "blue", "black", "white"]
 
 person.colors === anotherPerson.colors 				// true
-person.colors === yetAnotherPerson .colors 			// true
-anotherPerson.colors === yetAnotherPerson .colors 	// true
+person.colors === yetAnotherPerson.colors 			// true
+anotherPerson.colors === yetAnotherPerson.colors 	// true
 ~~~
 
 在这个例子中，可看出原有对象和以它为基础创建的两个新对象共享同一个引用类型 colors 数组，这里实际上是浅拷贝了两次 person
@@ -322,7 +322,7 @@ anotherPerson.sayName()	// 张三
 
 ## 寄生组合继承
 
-寄生组合继承可以算是引用类型继承的最佳模式了，它解决了[组合继承](./#组合继承)会调用两次父类构造函数的问题，提高了代码执行效率。
+寄生组合继承可以算是引用类型继承的最佳模式了，它解决了[组合继承](/#组合继承)会调用两次父类构造函数的问题，提高了代码执行效率。
 
 
 
