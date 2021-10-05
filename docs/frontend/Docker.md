@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: Docker使用笔记
 postTime: 2021-02-01
 categories: 常用工具

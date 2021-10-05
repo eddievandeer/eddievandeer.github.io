@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: 详解JavaScript中的继承
 postTime: 2021-08-09
 categories: 

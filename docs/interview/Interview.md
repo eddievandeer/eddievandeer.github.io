@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: 实习面经
 postTime: 2021-03-28
 categories: 面试

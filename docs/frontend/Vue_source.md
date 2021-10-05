@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: Vue源码学习笔记
 postTime: 2020-10-20
 categories: Vue源码学习笔记

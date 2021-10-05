@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: Nodejs笔记
 postTime: 2020-9-22
 categories: 后端笔记

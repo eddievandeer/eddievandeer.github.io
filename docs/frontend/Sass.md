@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: CSS预处理器Sass的简单使用
 postTime: 2020-08-09
 categories: 

@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: Vue3尝鲜记录
 postTime: 2020-10-20
 categories: 

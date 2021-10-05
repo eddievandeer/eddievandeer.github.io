@@ -1,5 +1,5 @@
 ---
-layout: AboutMe
+aboutme: true
 title: 关于我
 ---
 

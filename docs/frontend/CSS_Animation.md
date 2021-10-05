@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: CSS animations 和 transitions的性能问题
 postTime: 2021-04-07
 categories: 

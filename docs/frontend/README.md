@@ -1,5 +1,5 @@
 ---
-layout: ArticleList
+list: true
 ---
 
 # 写在前面

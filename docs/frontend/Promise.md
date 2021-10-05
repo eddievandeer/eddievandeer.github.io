@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: 手写符合Promise A+规范的Promise
 postTime: 2021-04-10
 categories: 前端教程

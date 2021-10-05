@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: DOM笔记
 postTime: 2020-10-02
 categories: 

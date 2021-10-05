@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: 做过的一些面试题
 postTime: 2021-01-05
 categories: 面试

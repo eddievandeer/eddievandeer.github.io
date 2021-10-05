@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: CSS笔记
 postTime: 2020-08-09
 categories:

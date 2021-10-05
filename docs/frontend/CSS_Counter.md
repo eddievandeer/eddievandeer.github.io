@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: 使用CSS为每个标题添加章节号
 postTime: 2021-05-29
 categories: 

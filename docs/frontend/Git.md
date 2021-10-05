@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: Git的简单使用
 postTime: 2020-08-09
 categories: 常用工具

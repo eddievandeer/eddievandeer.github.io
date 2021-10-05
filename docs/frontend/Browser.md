@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: 浏览器相关原理
 postTime: 2020-08-09
 categories: 

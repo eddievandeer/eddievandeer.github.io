@@ -1,4 +1,4 @@
 ---
-layout: Categories
+categoriesPage: true
 ---
 

@@ -1,5 +1,4 @@
 ---
-layout: ArticleDetail
 title: Docker + Nginx部署前端项目
 postTime: 2021-05-24
 categories: 前端教程

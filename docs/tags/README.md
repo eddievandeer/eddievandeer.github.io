@@ -1,3 +1,3 @@
 ---
-layout: Tags
+tagsPage: true
 ---
