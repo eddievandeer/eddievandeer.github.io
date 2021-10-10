@@ -4,6 +4,8 @@ module.exports = {
     license: 'CC BY-NC-SA 4.0',
     // sidebar: 'auto',
     sidebarDepth: 2,
+    appId: 'eytWDTcVXxD6jB2TPPIFVljq-gzGzoHsz',
+    appKey: 'sJRhu6ftXLC0eNR4vsjo3Euy',
     logo: '/assets/img/logo.jpg',
     background: 'http://upyun.cavalheiro.cn/images/background.jpg',
     externalLinks: [
