@@ -5,9 +5,9 @@ module.exports = [
     {
         text: '前端笔记', link: '/frontend/'
     },
-    // {
-    //     text: '画册', link: '/album/'
-    // },
+    {
+        text: '每日一题', link: '/daily-question/'
+    },
     {
         text: '分类', link: '/categories/'
     },
