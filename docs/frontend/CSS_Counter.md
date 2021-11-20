@@ -154,6 +154,41 @@ h4::before {
 
 
 
+## CSS 计数器的其他用法
+
+这里再介绍一个 CSS 计数器的应用场景，它可以用来做多选框的计数器，做到不使用 JavaScript 直接显示多选框的选中个数
+
+HTML 如下：
+
+~~~html
+<div class="box">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <p>你选择了<span class="counter"></span>个项</p>
+</div>
+~~~
+
+CSS 实现代码如下：
+
+~~~css
+.box {
+    counter-reset: checkedCounter;
+}
+
+:checked {
+    counter-increment: checkedCounter;
+}
+
+.counter::before {
+    content: counter(checkedCounter);
+}
+~~~
+
+
+
 ## 参考
 
 本文部分内容参考自 [MDN](https://developer.mozilla.org/zh-CN/) ，参考的内容如下：
