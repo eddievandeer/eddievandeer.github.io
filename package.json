@@ -12,6 +12,6 @@
   "dependencies": {
     "@vuepress/theme-default": "^1.0.0-rc.1",
     "vuepress": "^1.5.4",
-    "vuepress-theme-vivek": "^1.1.0"
+    "vuepress-theme-vivek": "^1.1.1"
   }
 }
