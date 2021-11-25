@@ -4,6 +4,7 @@ postTime: 2021-10-18
 categories: 每日一题
 tags:
 - JavaScript
+- 面试
 ---
 
 ::: slot abstract
@@ -76,3 +77,10 @@ Object.prototype.toString.call(arr) == '[object Array]' // true
 Object.prototype.toString.call(obj) == '[object Array]' // false
 ~~~
 
+
+
+### 鸭子类型
+
+> 如果一只动物，长得像鸭子，走路和叫声也像鸭子，那么这就是一只鸭子
+
+鸭子类型的含义是：我们并不关心对象的类型，只关心它的行为。这种方法准确来说是用来判断数组和伪数组（即看起来像数组的对象）的。如果一个对象以从 0 开始计数的下标存储数据，包含 `length` 属性，还拥有 `slice` 、 `splice` 等方法，那么我们就可以把它当成是一个数组对象
