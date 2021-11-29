@@ -3,6 +3,7 @@ module.exports = {
     author: 'Vivek',
     license: 'CC BY-NC-SA 4.0',
     // sidebar: 'auto',
+    filters: ['每日一题'],
     sidebarDepth: 2,
     appId: 'eytWDTcVXxD6jB2TPPIFVljq-gzGzoHsz',
     appKey: 'sJRhu6ftXLC0eNR4vsjo3Euy',
