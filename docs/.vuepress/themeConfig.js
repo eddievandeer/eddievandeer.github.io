@@ -5,6 +5,7 @@ module.exports = {
     // sidebar: 'auto',
     filters: ['每日一题'],
     sidebarDepth: 2,
+    valine: true,
     appId: 'eytWDTcVXxD6jB2TPPIFVljq-gzGzoHsz',
     appKey: 'sJRhu6ftXLC0eNR4vsjo3Euy',
     logo: '/assets/img/logo.jpg',
@@ -31,8 +32,7 @@ module.exports = {
         },
         copyrightInfo: 'MIT Licensed | Copyright © 2020-present Vivek',
         // 服务提供商信息，支持html标签
-        // TODO: 拼写错误
-        surpport: ` <span>本网站由</span>
+        support: ` <span>本网站由</span>
                     <a href="https://www.upyun.com/" target="_blank" rel="noopener noreferrer">
                         <img height="30px"
                             src="https://cdn.jsdelivr.net/gh/eddievandeer/eddievandeer.github.io/docs/.vuepress/public/assets/img/upyun-logo.png"
