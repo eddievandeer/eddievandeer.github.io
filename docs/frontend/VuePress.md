@@ -8,6 +8,22 @@ tags:
 - 静态博客
 ---
 
+
+
+::: slot abstract
+
+作为一个程序员，拥有一个自己的博客网站算得上是家常便饭了
+
+每当我们解决一个问题时，及时总结并记录下来是一个对学习很有帮助的习惯，方便以后遇到同类型的问题时，不用再去百度谷歌找半天。而将这些内容发布在自己的博客网站上，同样也可以让其他遇上同样问题的人看到，并帮助到他们。借用在一个个人博客上看到的一句话： 
+
+> 对任何渴望进步的人来说，写博客/文章/回答对自己的成长帮助都是巨大的。频率和数量不必过分强求，有话要说就写写，没事就歇歇，随意点。因为坚持写作的那一刻起，你就已经开始受益。
+
+我想，这就是搭建个人博客网站最大的意义
+
+:::
+
+
+
 ## 1、安装
 
 > 安装之前，需要确保Node.js的版本要在8或以上
@@ -356,6 +372,28 @@ theme
 ├── index.js			//入口文件
 └── enhanceApp.js		//客户端增强文件，可导入全局文件
 ```
+
+创建完 `thmem` 目录后，即可在此目录中以平常开发vue项目的方式开发博客网站。开发完成后还可以将该 `thmem` 目录作为一个 `Vuepress` 主题包发布到 [npm](https://www.npmjs.com/) 上
+
+通常一个主题项目命名通常为如下格式：`vuepress-theme-name` ，前面的 `vuepress-theme` 为固定格式，后面的 `name` 是你自己为这个主题起的名字。发布完成后可使用 `npm i vuepress-theme-name -D` 安装至博客项目，在博客项目的 `.vuepress/config.js` 文件中进行如下配置后即可生效：
+
+~~~js
+module.exports = {
+    // ...
+    theme: 'vuepress-theme-vivek',
+    themeConfig: {
+        // Please head documentation to see the available options.
+    }
+}
+// or
+module.exports = {
+    // ...
+    theme: 'vivek',
+    themeConfig: {
+        // Please head documentation to see the available options.
+    }
+}
+~~~
 
 
 
