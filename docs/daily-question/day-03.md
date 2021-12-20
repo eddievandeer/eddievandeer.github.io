@@ -33,6 +33,10 @@ tags:
 
 ### 防抖（debounce）
 
+这里用一个滚动事件来演示防抖的效果：
+
+![debounce](https://upyun.cavalheiro.cn/images/debounce.gif)
+
 简单的代码实现：
 
 ~~~js
@@ -90,6 +94,10 @@ function debounce(fn, delay, immediate) {
 
 
 ### 节流（throttle）
+
+还是同样用一个滚动事件来演示节流的效果：
+
+![throttle](https://upyun.cavalheiro.cn/images/throttle.gif)
 
 简单的代码实现：
 

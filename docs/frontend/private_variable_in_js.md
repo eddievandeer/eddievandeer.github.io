@@ -198,7 +198,7 @@ o.getValue()
 
 通过这种方式创建出的对象结构如下：
 
-![image-20211102202942929](http://upyun.cavalheiro.cn/images/image-20211102202942929.png)
+![image-20211102202942929](https://upyun.cavalheiro.cn/images/image-20211102202942929.png)
 
 使用这种方法实现的私有变量已经和其他面向对象语言的效果差不多了，因此我个人是将其当作最佳实践来使用的
 
