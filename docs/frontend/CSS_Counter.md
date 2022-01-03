@@ -187,6 +187,10 @@ CSS 实现代码如下：
 }
 ~~~
 
+最终效果如下：
+
+![checkbox](https://upyun.cavalheiro.cn/images/checkbox.gif)
+
 
 
 ## 参考
