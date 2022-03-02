@@ -6,6 +6,7 @@ tags:
 - 面试
 - 学习笔记
 - 汇总
+not: true
 ---
 
 
@@ -56,7 +57,7 @@ tags:
 
 ### typeof
 
-此方法的缺点是：当遇上 `null` 时值为 `Object` ，所以无法区分 `null` 和 `object` 的类型。这是因为在 JavaScript 中，不同的对象都是使用二进制存储的，如果二进制的前三位都是 0 的话会被判断为 `Object` 类型，而 `null` 的二进制全为 0
+此方法的缺点是：当遇上 `null` 时值为 `object` ，所以无法区分 `null` 和 `object` 的类型。这是因为在 JavaScript 中，不同的对象都是使用二进制存储的，如果二进制的前三位都是 0 的话会被判断为 `Object` 类型，而 `null` 的二进制全为 0
 
 ~~~js
 typeof 1 //'number'
