@@ -106,7 +106,7 @@ Bailing hydration and performing full client-side render.
 
 ## 最终解决方案
 
-现在已经知道了问题是如何出现的了，也知道了解决办法：在 `beforeCreate` 或 `created ` 中去初始化数据。但因为一些原因，我只能在 `mounted` 中进行的数据初始化，所以能选的方案就只有使用 `<client-only-only>` 盖住了，这我还是不能接受
+现在已经知道了问题是如何出现的了，也知道了解决办法：在 `beforeCreate` 或 `created ` 中去初始化数据。但因为一些原因，我只能在 `mounted` 中进行的数据初始化，所以能选的方案就只有使用 `<client-only>` 盖住了，这我还是不能接受
 
 在查找 issue 的过程中，我看过有人用 **ElementUI** 的分页组件时也遇到了这个报错，但我自己试的时候并没有出现上述问题，于是我猜想，应该是 **ElementUI** 修复了这个 bug ，那么问题就简单了，我去参考它的源码 “剽窃” 一下它的解决方案不就好了
 
