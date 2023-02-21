@@ -14,6 +14,7 @@ jobs:
           npm install
           npm run docs:build
         env:
+          NODE_OPTIONS: --openssl-legacy-provider
           CI: false
 
       - name: Deploy 🚀
